@@ -127,13 +127,12 @@ table {
 
 html {
   height: 100% !important;
-  background-color: #24262a;
+  background-color: #282c34;
   font-family: "Montserrat";
   font-weight: 400;
   font-size: 760;
   color: #EEE8D6;
   overflow-x: hidden;
-  user-select: none;
 }
 
 .height-100{
