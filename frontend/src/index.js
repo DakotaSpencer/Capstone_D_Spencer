@@ -4,12 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import PaletteGenerator from './components/PaletteGenerator';
+import ImageToPalette from './components/ImageToPalette';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <App />
     <PaletteGenerator/>
+    <ImageToPalette/>
   </React.StrictMode>
 );
 
