@@ -1,0 +1,137 @@
+.share{
+    /* width: 100%; */
+    border-radius: 10px;
+    background-color: #292929;
+    z-index: 999;
+    border-radius: 15px;
+    box-shadow: 0px 0px 25px -8px rgb(255, 255, 255);
+    -webkit-box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.632);
+    -moz-box-shadow: 0px 0px 25px -8px rgba(0,0,0);
+}
+
+.share:focus-within{
+    box-shadow: 0px 0px 25px -8px rgb(255, 255, 255);
+    -webkit-box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.632);
+    -moz-box-shadow: 0px 0px 25px -8px rgba(0,0,0);
+}
+
+.share-wrapper{
+    border-radius: 25px;
+    background-color: #292929;
+    padding: 10px;
+    z-index: 999;
+}
+
+.share-top{
+    display: flex;
+    align-items: center;
+}
+
+.share-profile-img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 10px;
+}
+
+.share-input{
+    border: none;
+    background-color: #292929;
+    width: 80%;
+    color: aliceblue;
+    font-size: medium;
+}
+
+.share-input:focus{
+    outline: none;
+}
+
+.share-hr{
+    margin: 20px;
+}
+
+.share-bottom{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.share-options{
+    display: flex;
+    margin-left: 10px;
+}
+
+.share-option{
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+    cursor: pointer;
+    border-radius: 10px;
+    width: max-content;
+    padding: 5px;
+}
+
+.share-option:hover{
+    background-color: #91919133;
+}
+
+.share-icon{
+    font-size: 18px;
+    margin-right: 3px;
+}
+
+.share-option-text{
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.send-btn{
+    margin-right: 5px;
+}
+
+.share-button{
+    background-color: #00000000;
+    color: aliceblue;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    padding: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.share-button:hover{
+    background-color: #398be8a0;
+}
+
+.share-img-container{
+    padding: 0 20px 10px 20px;
+    position: relative;
+}
+
+.share-img{
+    width: 25%;
+    object-fit: cover;
+}
+
+.share-cancel-img{
+    position: absolute;
+    top: 0;
+    right: 20px;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.italics{
+    font-style: italic;
+}
+
+.bold{
+    font-weight: bolder;
+}
