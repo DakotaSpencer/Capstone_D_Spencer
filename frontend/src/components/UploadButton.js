@@ -10,7 +10,7 @@ export const FileInput = props => (
     <div className='share-options'>
       <label htmlFor="file" className='share-option'>
         <PhotoOutlined className='share-icon'/>
-        <span className='share-option-text' id="file-upload">Photo</span>
+        <span className='share-option-text' id="file-upload">Upload Photo</span>
         <input
           style={{ display: "none" }}
           type="file"

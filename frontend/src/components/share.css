@@ -63,6 +63,7 @@
 }
 
 .share-option{
+    background-color: #419494;
     display: flex;
     align-items: center;
     margin-right: 15px;
@@ -73,7 +74,7 @@
 }
 
 .share-option:hover{
-    background-color: #91919133;
+    background-color: #4194944d;
 }
 
 .share-icon{
