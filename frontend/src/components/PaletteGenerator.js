@@ -38,30 +38,33 @@ const PaletteGenerator = () => {
     return (
       <div className="App">
         <body>
-          <form className="searchForm" onSubmit={handleSearch}>
-            <label>Base Color</label>
-            {/*Set the value to our search term */}
-            {/* We need to tell react when the value of this textbox changes*/}
-            <input type='text' value={hexCode} placeholder=''
-              onChange={e => setHexCode(e.target.value)}/>
-            <label>Count</label>
-  
-            <input type='number' value={colorCount} placeholder='5'
-              onChange={e => e.target.value > 10 ? setColorCount(10) : setColorCount(e.target.value) | e.target.value < 1 ? setColorCount(1) : setColorCount(e.target.value)}/>
-  
-  
-            <label>Generation Mode</label>
-            <select id="modeSelect" value={generationMode} onChange={e => setGenerationMode(e.target.value)}>
-              <option value="analogic">analogic</option>
-              <option value="analogic-complement">analogic-complement</option>
-              <option value="complement">complement</option>
-              <option value="monochrome">monochrome</option>
-              <option value="monochrome-dark">monochrome-dark</option>
-              <option value="monochrome-light">monochrome-light</option>
-              <option value="triad">triad</option>
-              <option value="quad">quad</option>
-            </select>
-            <input type='submit' value='Generate'/>
+          <h1>Palette Generator</h1>
+          <form className="searchForm App" onSubmit={handleSearch}>
+            <div>
+              <label className='m-2'>Base Color</label>
+              <input type='text' value={hexCode} placeholder=''
+                onChange={e => setHexCode(e.target.value)}/>
+            </div>
+            <div>
+              <label className='m-2'>Count</label>
+              <input type='number' value={colorCount} placeholder='5'
+                onChange={e => e.target.value > 10 ? setColorCount(10) : setColorCount(e.target.value) | e.target.value < 1 ? setColorCount(1) : setColorCount(e.target.value)}/>
+            </div>
+            <div>
+              <label className='m-2'>Generation Mode</label>
+              <select id="modeSelect" value={generationMode} onChange={e => setGenerationMode(e.target.value)}>
+                <option value="analogic">analogic</option>
+                <option value="analogic-complement">analogic-complement</option>
+                <option value="complement">complement</option>
+                <option value="monochrome">monochrome</option>
+                <option value="monochrome-dark">monochrome-dark</option>
+                <option value="monochrome-light">monochrome-light</option>
+                <option value="triad">triad</option>
+                <option value="quad">quad</option>
+              </select>
+              <input type='submit' value='Generate'/>
+            </div>
+            
             <ColorList colordata={colordata}/>
           </form>
         </body>

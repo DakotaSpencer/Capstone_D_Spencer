@@ -141,7 +141,6 @@ html {
 
 body {
     line-height: 2;
-    min-height: 1080px !important;
     max-width: 100%;
     text-align: var(--bs-body-text-align);
     -webkit-text-size-adjust: 100%;
