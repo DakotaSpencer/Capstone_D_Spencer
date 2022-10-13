@@ -63,7 +63,7 @@ img {
 
 .display-swatches {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   grid-gap: 10px;
   justify-content: center;
 }
@@ -105,7 +105,8 @@ footer {
 
   .display-swatches {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    min-width: max-content;
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
     justify-items: center;
   }

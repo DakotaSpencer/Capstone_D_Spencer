@@ -55,17 +55,23 @@ const PaletteGenerator = () => {
           <h1>Palette Generator</h1>
           <form className="searchForm align-center" onSubmit={handleSearch}>
             <div>
-              <label className='m-2'>Base Color</label>
+              
+            </div>
+            <div>
+              
+            </div>
+            <div>
+              <label className='m-1 text-size-medium text-weight-thick'>Base Color</label>
               <input type='text' value={hexCode} placeholder=''
                 onChange={e => setHexCode(e.target.value)}/>
-            </div>
-            <div>
-              <label className='m-2'>Count</label>
+
+
+              <label className='m-1 text-size-medium text-weight-thick'>Count</label>
               <input type='number' value={colorCount} placeholder='5'
                 onChange={e => e.target.value > 10 ? setColorCount(10) : setColorCount(e.target.value) | e.target.value < 1 ? setColorCount(1) : setColorCount(e.target.value)}/>
-            </div>
-            <div>
-              <label className='m-2'>Generation Mode</label>
+              
+              
+              <label className='m-1 text-size-medium text-weight-thick'>Generation Mode</label>
               <select id="modeSelect" value={generationMode} onChange={e => setGenerationMode(e.target.value)}>
                 <option value="analogic">analogic</option>
                 <option value="analogic-complement">analogic-complement</option>
@@ -77,7 +83,7 @@ const PaletteGenerator = () => {
                 <option value="quad">quad</option>
               </select>
 
-              <label className='m-2'>Blending Mode</label>
+              <label className='m-1 text-weight-thick'>Blending Mode</label>
               <select id="modeSelect" value={blendingMode} onChange={e => setBlendingMode(e.target.value)}>
                 <option value="normal">normal</option>
                 <option value="multiply">multiply</option>
@@ -96,14 +102,17 @@ const PaletteGenerator = () => {
                 <option value="color">color</option>
                 <option value="luminosity">luminosity</option>
               </select>
-              <input type='submit' value='Generate'/>
+              <input type='submit' value='Generate' className='button'/>
             </div>
             
             
           </form>
-          <div style={{mixBlendMode:`${blendingMode}`}} id="color-canvas">
-            <ColorList colordata={colordata} />
+          <div id="color-canvas">
+            <div style={{mixBlendMode:`${blendingMode}`}}>
+              <ColorList colordata={colordata} />
+            </div>
           </div>
+          
           
           <div className='align-center center-content p-2'>
             <h3 className='center button text-size-medium' onClick={handleCaptureClick}>

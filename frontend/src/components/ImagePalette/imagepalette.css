@@ -20,6 +20,8 @@
 
 .share-wrapper{
     border-radius: 25px;
+    background-color: #29292919;
+    width: max-content;
     padding: 10px;
     z-index: 999;
 }

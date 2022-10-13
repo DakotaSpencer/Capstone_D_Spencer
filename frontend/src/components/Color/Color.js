@@ -11,6 +11,8 @@ const Color = ({color}) => {
         <div className='text-center text-size-medium'>
             <div>{color.name.value}</div>
             {hexShown? color.hex.value: color.hex.clean}
+            <div>R: {color.rgb.r} G: {color.rgb.g} B: {color.rgb.b}</div>
+            <div>H: {color.hsl.h} S: {color.hsl.s} L: {color.hsl.l}</div>
         </div>
     </div>
   )
