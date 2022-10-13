@@ -1,5 +1,5 @@
 import React from 'react'
-import { PhotoOutlined, GifRounded, EmojiEmotionsOutlined, Cancel} from '@material-ui/icons';
+import { PhotoOutlined} from '@material-ui/icons';
 
 export const FileInput = props => (
 

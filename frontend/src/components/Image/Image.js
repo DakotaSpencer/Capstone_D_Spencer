@@ -11,7 +11,7 @@ export const Image = props =>
   ) : (
     <div className="image-container">
       <ColorExtractor getColors={props.getColors} onError={props.onError}>
-        <img src={props.image} />
+        <img src={props.image} alt={props.image.name}/>
       </ColorExtractor>
     </div>
   )

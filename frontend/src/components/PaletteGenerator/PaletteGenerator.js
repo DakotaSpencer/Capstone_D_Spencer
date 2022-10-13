@@ -1,12 +1,14 @@
-import '../App.css'
 import axios from 'axios'
 import React from 'react';
 import {useEffect, useState} from 'react'
-import ColorList from './ColorList';
+import ColorList from '../ColorList/ColorList';
+import '../ColorList/ColorList.css'
+import DownloadOutlined from '@mui/icons-material/Download';
 
 const PaletteGenerator = () => {
     const [hexCode, setHexCode] = useState(Math.floor(Math.random()*16777215).toString(16).toUpperCase());
     const [generationMode, setGenerationMode] = useState('analogic');
+    const [blendingMode, setBlendingMode] = useState('');
     const [colorCount, setColorCount] = useState('');
     const [colordata, setColorData] = useState([]);
   
@@ -14,6 +16,10 @@ const PaletteGenerator = () => {
       getData()
     },[])
   
+    const mixBlendingMode = {
+      mixBlendMode: blendingMode
+    }
+
     const getData = async () => {
         console.log(hexCode)
         //https://www.thecolorapi.com/scheme?hex=${this.hexcolor}&mode=${this.selectedMode}&count=${this.numOfColors}
@@ -36,10 +42,10 @@ const PaletteGenerator = () => {
     }
   
     return (
-      <div className="App">
+      <div className="align-center">
         <body>
           <h1>Palette Generator</h1>
-          <form className="searchForm App" onSubmit={handleSearch}>
+          <form className="searchForm align-center" onSubmit={handleSearch}>
             <div>
               <label className='m-2'>Base Color</label>
               <input type='text' value={hexCode} placeholder=''
@@ -62,11 +68,43 @@ const PaletteGenerator = () => {
                 <option value="triad">triad</option>
                 <option value="quad">quad</option>
               </select>
+
+              <label className='m-2'>Blending Mode</label>
+              <select id="modeSelect" value={blendingMode} onChange={e => setBlendingMode(e.target.value)}>
+                <option value="normal">normal</option>
+                <option value="multiply">multiply</option>
+                <option value="screen">screen</option>
+                <option value="overlay">overlay</option>
+                <option value="darken">darken</option>
+                <option value="lighten">lighten</option>
+                <option value="color-dodge">color-dodge</option>
+                <option value="color-burn">color-burn</option>
+                <option value="hard-light">hard-light</option>
+                <option value="soft-light">soft-light</option>
+                <option value="difference">difference</option>
+                <option value="exclusion">exclusion</option>
+                <option value="hue">hue</option>
+                <option value="saturation">saturation</option>
+                <option value="color">color</option>
+                <option value="luminosity">luminosity</option>
+              </select>
               <input type='submit' value='Generate'/>
             </div>
             
-            <ColorList colordata={colordata}/>
+            
           </form>
+          <div style={{mixBlendMode:`${blendingMode}`}}>
+            <ColorList colordata={colordata} />
+          </div>
+          
+          <div className='align-center center-content p-2'>
+            <h3 className='center button text-size-medium'>
+              <DownloadOutlined className='m-0_2'/> Download
+            </h3>
+            <h3 className='center button text-size-medium m-2'>
+              Save Palette
+            </h3>
+          </div>
         </body>
       </div>
     );

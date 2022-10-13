@@ -542,6 +542,10 @@ svg {
   width: 100%;
 }
 
+.align-center{
+  text-align: center;
+}
+
 .bg-dark-01 {
   background-color: #36393f;
 }
@@ -629,7 +633,8 @@ svg {
   padding: 10px;
   margin: 10px;
   background-color: #7289da;
-  border-radius: 20px;
+  border: none;
+  border-radius: 50px;
   cursor: pointer;
   max-width: fit-content;
   user-select: none;
@@ -743,3 +748,8 @@ svg {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+
+.colorlist-div{
+  mix-blend-mode: normal;
+}

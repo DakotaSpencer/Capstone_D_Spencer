@@ -1,12 +1,9 @@
 import React from 'react'
-import { Image } from './Image'
-import { Swatches } from './Swatches'
-import { FileInput } from './UploadButton'
-import { PhotoOutlined, GifRounded, EmojiEmotionsOutlined, Cancel} from '@material-ui/icons';
-import { Send } from '@material-ui/icons';
-import './share.css'
-import '../App.css'
-import './ColorList.css'
+import { Image } from '../Image/Image'
+import { Swatches } from '../Swatches/Swatches'
+import { FileInput } from '../UploadButton/UploadButton'
+import './imagepalette.css'
+import '../ColorList/ColorList.css'
 
 const IMAGE = 'https://i.imgur.com/pBcut2e.jpeg'
 
@@ -63,7 +60,7 @@ export class ImagePalette extends React.Component {
           flexDirection: 'column'
         }}
       >
-        <div className='App m-2'>
+        <div className='align-center m-2'>
           <h1 className='p-1'>Image To Palette</h1>
             <div className='share-wrapper'>
                 <div className="share-img-container">

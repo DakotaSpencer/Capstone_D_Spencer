@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import PaletteGenerator from './components/PaletteGenerator';
+import PaletteGenerator from './components/PaletteGenerator/PaletteGenerator';
 
-import { ImagePalette } from './components/ImagePalette';
+import { ImagePalette } from './components/ImagePalette/ImagePalette';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
