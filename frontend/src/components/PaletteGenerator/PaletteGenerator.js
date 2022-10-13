@@ -1,9 +1,11 @@
 import axios from 'axios'
 import React from 'react';
-import {useEffect, useState} from 'react'
+import {useEffect, useState, useCallback} from 'react'
 import ColorList from '../ColorList/ColorList';
 import '../ColorList/ColorList.css'
 import DownloadOutlined from '@mui/icons-material/Download';
+import downloadjs from 'downloadjs';
+import html2canvas from 'html2canvas';
 
 const PaletteGenerator = () => {
     const [hexCode, setHexCode] = useState(Math.floor(Math.random()*16777215).toString(16).toUpperCase());
@@ -40,6 +42,12 @@ const PaletteGenerator = () => {
       //Make sure to call the movie hook so react knows
       getData();
     }
+
+    const handleCaptureClick = useCallback(async () => {
+      const canvas = await html2canvas(document.getElementById('color-canvas'));
+      const dataURL = canvas.toDataURL('image/png');
+      downloadjs(dataURL, 'download.png', 'image/png');
+    }, []);
   
     return (
       <div className="align-center">
@@ -93,12 +101,12 @@ const PaletteGenerator = () => {
             
             
           </form>
-          <div style={{mixBlendMode:`${blendingMode}`}}>
+          <div style={{mixBlendMode:`${blendingMode}`}} id="color-canvas">
             <ColorList colordata={colordata} />
           </div>
           
           <div className='align-center center-content p-2'>
-            <h3 className='center button text-size-medium'>
+            <h3 className='center button text-size-medium' onClick={handleCaptureClick}>
               <DownloadOutlined className='m-0_2'/> Download
             </h3>
             <h3 className='center button text-size-medium m-2'>
