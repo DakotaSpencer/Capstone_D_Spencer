@@ -1,14 +1,14 @@
 import React from 'react'
-import Color from '../Color/Color';
-import '../Color/Color'
+import FilterColor from '../FilterColor/FilterColor';
+import '../FilterColor/FilterColor'
 
-const ColorList = (props) => {
+const FilterColorList = (props) => {
     return (
         <div className="center">
             {
             props.colordata.map((color)=>(
             <div key={color.hex.clean} className="col">
-                <Color color={color}/>
+                <FilterColor color={color}/>
             </div>
             ))
         }
@@ -16,4 +16,4 @@ const ColorList = (props) => {
     )
 }
 
-export default ColorList
+export default FilterColorList

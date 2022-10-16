@@ -9,10 +9,10 @@ import { ImagePalette } from './components/ImagePalette/ImagePalette';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  <>
     <PaletteGenerator/>
     <ImagePalette/>
-  </React.StrictMode>
+  </>
 );
 
 // If you want to start measuring performance in your app, pass a function

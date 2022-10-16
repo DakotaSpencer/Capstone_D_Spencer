@@ -632,13 +632,34 @@ svg {
 .button {
   padding: 10px;
   margin: 10px;
-  background-color: #7289da;
+  background-color: #15C0EC;
   border: none;
   border-radius: 50px;
+  font-size: 20px;
   cursor: pointer;
   max-width: fit-content;
   user-select: none;
   visibility: visible;
+  transition: background-color 0.3s linear;
+}
+
+.clear-button{
+  padding: 5px;
+  margin: auto;
+  background-color: #15c1ec00;
+  border: none;
+  border-radius: 50px;
+  font-size: 20px;
+  cursor: pointer;
+  max-width: fit-content;
+  user-select: none;
+  visibility: visible;
+  transition: background-color 0.3s linear;
+}
+
+.clear-button:hover {
+  background-color: #ffffff34;
+  transition: background-color 0.3s linear;
 }
 
 .button:hover {
@@ -748,8 +769,3 @@ svg {
 }
 
 /*# sourceMappingURL=style.css.map */
-
-
-.colorlist-div{
-  mix-blend-mode: normal;
-}

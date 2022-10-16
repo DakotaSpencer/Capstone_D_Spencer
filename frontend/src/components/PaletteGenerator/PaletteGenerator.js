@@ -6,6 +6,8 @@ import '../ColorList/ColorList.css'
 import DownloadOutlined from '@mui/icons-material/Download';
 import downloadjs from 'downloadjs';
 import html2canvas from 'html2canvas';
+import BaseColor from '../BaseColor/BaseColor';
+import FilterColorList from '../FilterColorList/FilterColorList';
 
 const PaletteGenerator = () => {
     const [hexCode, setHexCode] = useState(Math.floor(Math.random()*16777215).toString(16).toUpperCase());
@@ -13,34 +15,35 @@ const PaletteGenerator = () => {
     const [blendingMode, setBlendingMode] = useState('');
     const [colorCount, setColorCount] = useState('');
     const [colordata, setColorData] = useState([]);
-  
+    const [singlecolor, setSingleColor] = useState([]);
+    
     useEffect(() => {
       getData()
+      getBaseColor()
     },[])
   
     const mixBlendingMode = {
       mixBlendMode: blendingMode
     }
 
+    const getBaseColor = async () => {
+      //https://www.thecolorapi.com/id?format=json&named=false&hex=${hexCode}
+      const result = await axios.get(`https://www.thecolorapi.com/id?hex=${hexCode}`)
+      setSingleColor(result.data)
+    }
+    
+
     const getData = async () => {
-        console.log(hexCode)
-        //https://www.thecolorapi.com/scheme?hex=${this.hexcolor}&mode=${this.selectedMode}&count=${this.numOfColors}
-        const result = await axios.get(`https://www.thecolorapi.com/scheme?hex=${hexCode}&mode=${generationMode}&count=${colorCount}`)
-        console.log(`https://www.thecolorapi.com/scheme?hex=${hexCode}&mode=${generationMode}&count=${colorCount}`)
-        console.log(result.data.colors)
-        setColorData(result.data.colors)
+      //https://www.thecolorapi.com/scheme?hex=${this.hexcolor}&mode=${this.selectedMode}&count=${this.numOfColors}
+      const results = await axios.get(`https://www.thecolorapi.com/scheme?hex=${hexCode}&mode=${generationMode}&count=${colorCount}`)
+      setColorData(results.data.colors)
     }
   
     const handleSearch = (e) => {
       e.preventDefault();
-      
-      //Default is to do a postback, which is refreshing the page, which we dont want
-      //preventDefault() says dont post back, and instead do a console log
       console.log('User Submitted My Form!');
-  
-      //Based on the entered search term, reload out movies
-      //Make sure to call the movie hook so react knows
       getData();
+      getBaseColor();
     }
 
     const handleCaptureClick = useCallback(async () => {
@@ -51,14 +54,11 @@ const PaletteGenerator = () => {
   
     return (
       <div className="align-center">
-        <body>
+        <div>
           <h1>Palette Generator</h1>
           <form className="searchForm align-center" onSubmit={handleSearch}>
-            <div>
-              
-            </div>
-            <div>
-              
+            <div style={{backgroundColor : `#${hexCode}`}} className='text-light'>
+              #{hexCode}
             </div>
             <div>
               <label className='m-1 text-size-medium text-weight-thick'>Base Color</label>
@@ -83,7 +83,7 @@ const PaletteGenerator = () => {
                 <option value="quad">quad</option>
               </select>
 
-              <label className='m-1 text-weight-thick'>Blending Mode</label>
+              <label className='m-1 text-size-medium text-weight-thick'>Blending Mode</label>
               <select id="modeSelect" value={blendingMode} onChange={e => setBlendingMode(e.target.value)}>
                 <option value="normal">normal</option>
                 <option value="multiply">multiply</option>
@@ -107,12 +107,16 @@ const PaletteGenerator = () => {
             
             
           </form>
-          <div id="color-canvas">
-            <div style={{mixBlendMode:`${blendingMode}`}}>
-              <ColorList colordata={colordata} />
+          <div>
+            <div id="color-canvas">
+              <BaseColor singlecolor={singlecolor}/>
+              <ColorList colordata={colordata}/>
+              <div style={{mixBlendMode:`${blendingMode}`}}>
+                <FilterColorList colordata={colordata}/>
+              </div>
+              
             </div>
           </div>
-          
           
           <div className='align-center center-content p-2'>
             <h3 className='center button text-size-medium' onClick={handleCaptureClick}>
@@ -122,7 +126,7 @@ const PaletteGenerator = () => {
               Save Palette
             </h3>
           </div>
-        </body>
+        </div>
       </div>
     );
 }

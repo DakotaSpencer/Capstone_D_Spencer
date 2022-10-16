@@ -64,7 +64,6 @@ export class ImagePalette extends React.Component {
           <h1 className='p-1'>Image To Palette</h1>
             <div className='share-wrapper'>
                 <div className="share-img-container">
-                    
                     <Image
                       className="share-img"
                       error={this.state.hasError}
