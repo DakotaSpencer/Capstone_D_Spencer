@@ -57,9 +57,7 @@ const PaletteGenerator = () => {
         <div>
           <h1>Palette Generator</h1>
           <form className="searchForm align-center" onSubmit={handleSearch}>
-            <div style={{backgroundColor : `#${hexCode}`}} className='text-light'>
-              #{hexCode}
-            </div>
+
             <div>
               <label className='m-1 text-size-medium text-weight-thick'>Base Color</label>
               <input type='text' value={hexCode} placeholder=''
@@ -110,9 +108,9 @@ const PaletteGenerator = () => {
           <div>
             <div id="color-canvas">
               <BaseColor singlecolor={singlecolor}/>
-              <ColorList colordata={colordata}/>
+              <ColorList colordata={colordata} singlecolor={singlecolor}/>
               <div style={{mixBlendMode:`${blendingMode}`}}>
-                <FilterColorList colordata={colordata}/>
+                <FilterColorList colordata={colordata} singlecolor={singlecolor}/>
               </div>
               
             </div>
