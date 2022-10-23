@@ -66,7 +66,7 @@ const PaletteGenerator = () => {
 
               <label className='m-1 text-size-medium text-weight-thick'>Count</label>
               <input type='number' value={colorCount} placeholder='5'
-                onChange={e => e.target.value > 10 ? setColorCount(10) : setColorCount(e.target.value) | e.target.value < 1 ? setColorCount(1) : setColorCount(e.target.value)}/>
+                onChange={e => e.target.value > 10 ? setColorCount(10) : setColorCount(e.target.value)}/>
               
               
               <label className='m-1 text-size-medium text-weight-thick'>Generation Mode</label>

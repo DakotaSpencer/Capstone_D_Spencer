@@ -632,7 +632,7 @@ svg {
 .button {
   padding: 10px;
   margin: 10px;
-  background-color: #15C0EC;
+  background-color: #557ed6;
   border: none;
   border-radius: 50px;
   font-size: 20px;
@@ -646,7 +646,7 @@ svg {
 .clear-button{
   padding: 5px;
   margin: auto;
-  background-color: #15c1ec00;
+  background-color: #ffffff00;
   border: none;
   border-radius: 50px;
   font-size: 20px;
@@ -658,13 +658,13 @@ svg {
 }
 
 .clear-button:hover {
-  background-color: #ffffff34;
+  background-color: #ffffff6e;
   transition: background-color 0.3s linear;
 }
 
 .button:hover {
-  background-color: #9aabe5;
-  transition: background-color 0.3s linear;
+  background-color: #0a296d;
+  transition: background-color 0.1s linear;
 }
 
 .button_example, .link_example, .link_clicked_example, .button_selected_example {

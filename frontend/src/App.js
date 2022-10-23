@@ -1,12 +1,15 @@
 import './App.css';
 import React from 'react';
+import PaletteGenerator from './components/PaletteGenerator/PaletteGenerator';
+
+import { ImagePalette } from './components/ImagePalette/ImagePalette';
 
 function App() {
-
   return (
-    <div className="App">
-      Theres nothing here yet. Click Generate.
-    </div>
+    <>
+      <PaletteGenerator/>
+      <ImagePalette/>
+    </>
   );
 }
 

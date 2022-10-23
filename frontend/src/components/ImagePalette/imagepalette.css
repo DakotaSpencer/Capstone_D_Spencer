@@ -67,7 +67,8 @@
 }
 
 .share-option{
-    background-color: #15C0EC;
+    background-color: #557ed6;
+    color: #ffffff;
     border: none;
     border-radius: 50px;
     font-size: 20px;
@@ -83,8 +84,8 @@
 }
 
 .share-option:hover{
-    background-color: #9aabe5;
-    transition: background-color 0.3s linear;
+    background-color: #0a296d;
+    transition: background-color 0.1s linear;
 }
 
 .share-icon{
@@ -104,7 +105,7 @@
 .share-button{
     padding: 10px;
   margin: 10px;
-  background-color: #15C0EC;
+  background-color: #7095e4;
   border: none;
   border-radius: 50px;
   font-size: 20px;
@@ -116,7 +117,7 @@
 }
 
 .share-button:hover{
-    background-color: #9aabe5;
+    background-color: #163189;
   transition: background-color 0.3s linear;
 }
 
