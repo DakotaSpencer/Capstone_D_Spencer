@@ -8,11 +8,14 @@ import downloadjs from 'downloadjs';
 import html2canvas from 'html2canvas';
 import BaseColor from '../BaseColor/BaseColor';
 import FilterColorList from '../FilterColorList/FilterColorList';
+import { CloudUpload, Settings, ShareOutlined, ShareRounded } from '@material-ui/icons';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 const PaletteGenerator = () => {
     const [hexCode, setHexCode] = useState(Math.floor(Math.random()*16777215).toString(16).toUpperCase());
     const [generationMode, setGenerationMode] = useState('analogic');
-    const [blendingMode, setBlendingMode] = useState('');
+    const [blendingMode, setBlendingMode] = useState('normal');
     const [colorCount, setColorCount] = useState('');
     const [colordata, setColorData] = useState([]);
     const [singlecolor, setSingleColor] = useState([]);
@@ -44,6 +47,14 @@ const PaletteGenerator = () => {
       console.log('User Submitted My Form!');
       getData();
       getBaseColor();
+    }
+
+    const handleSelect=(e)=>{
+      console.log(e);
+      setBlendingMode(e)
+    }
+    function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
     const handleCaptureClick = useCallback(async () => {
@@ -80,26 +91,6 @@ const PaletteGenerator = () => {
                 <option value="triad">triad</option>
                 <option value="quad">quad</option>
               </select>
-
-              <label className='m-1 text-size-medium text-weight-thick'>Blending Mode</label>
-              <select id="modeSelect" value={blendingMode} onChange={e => setBlendingMode(e.target.value)}>
-                <option value="normal">normal</option>
-                <option value="multiply">multiply</option>
-                <option value="screen">screen</option>
-                <option value="overlay">overlay</option>
-                <option value="darken">darken</option>
-                <option value="lighten">lighten</option>
-                <option value="color-dodge">color-dodge</option>
-                <option value="color-burn">color-burn</option>
-                <option value="hard-light">hard-light</option>
-                <option value="soft-light">soft-light</option>
-                <option value="difference">difference</option>
-                <option value="exclusion">exclusion</option>
-                <option value="hue">hue</option>
-                <option value="saturation">saturation</option>
-                <option value="color">color</option>
-                <option value="luminosity">luminosity</option>
-              </select>
               <input type='submit' value='Generate' className='button'/>
             </div>
             
@@ -109,19 +100,54 @@ const PaletteGenerator = () => {
             <div id="color-canvas">
               <BaseColor singlecolor={singlecolor}/>
               <ColorList colordata={colordata} singlecolor={singlecolor}/>
-              <div style={{mixBlendMode:`${blendingMode}`}}>
-                <FilterColorList colordata={colordata} singlecolor={singlecolor}/>
+              <div style={{backgroundColor:'#323232'}}>
+                <div style={{mixBlendMode:`${blendingMode}`}}>
+                  <FilterColorList colordata={colordata} singlecolor={singlecolor}/>
+                </div>
               </div>
-              
+              <div className='m-2'>
+              <Dropdown onSelect={handleSelect} title={blendingMode}>
+            <Dropdown.Toggle variant="dark" id="dropdown-basic" title={blendingMode} style={{fontSize:'18px'}}>
+              {capitalizeFirstLetter(blendingMode)}
+            </Dropdown.Toggle>
+            <Dropdown.Menu alignRight id="dropdown-menu-align-right" title={blendingMode}>
+                <Dropdown.Item eventKey="pass-through">Pass Through</Dropdown.Item>
+                <Dropdown.Item eventKey="normal">Normal</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item eventKey="darken">Darken</Dropdown.Item>
+                <Dropdown.Item eventKey="multiply">Multiply</Dropdown.Item>
+                <Dropdown.Item eventKey="color-burn">Color Burn</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item eventKey="lighten">Lighten</Dropdown.Item>
+                <Dropdown.Item eventKey="screen">Screen</Dropdown.Item>
+                <Dropdown.Item eventKey="color-dodge">Color Dodge</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item eventKey="overlay">Overlay</Dropdown.Item>
+                <Dropdown.Item eventKey="soft-light">Soft Light</Dropdown.Item>
+                <Dropdown.Item eventKey="hard-light">Hard Light</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item eventKey="difference">Difference</Dropdown.Item>
+                <Dropdown.Item eventKey="exclusion">Exclusion</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item eventKey="hue">Hue</Dropdown.Item>
+                <Dropdown.Item eventKey="saturation">Saturation</Dropdown.Item>
+                <Dropdown.Item eventKey="color">Color</Dropdown.Item>
+                <Dropdown.Item eventKey="luminosity">Luminosity</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+            </div>
             </div>
           </div>
-          
+          {/* <h5 className='p-2 m-2'>Current Blending Mode: {capitalizeFirstLetter(blendingMode)}</h5> */}
           <div className='align-center center-content p-2'>
-            <h3 className='center button text-size-medium' onClick={handleCaptureClick}>
-              <DownloadOutlined className='m-0_2'/> Download
+            <h3 className='center button text-size-medium m-2 p-2' onClick={handleCaptureClick}>
+              <DownloadOutlined /><div className='m-1'>Download</div>
             </h3>
-            <h3 className='center button text-size-medium m-2'>
-              Save Palette
+            <h3 className='center button text-size-medium m-2 p-2'>
+              <CloudUpload className='m-0_2'/><div className='m-1'>Save Palette</div>
+            </h3>
+            <h3 className='center button text-size-medium m-2 p-2'>
+              <ShareRounded className='m-0_2'/><div className='m-1'>Share Palette</div>
             </h3>
           </div>
         </div>
