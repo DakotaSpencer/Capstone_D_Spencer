@@ -10,7 +10,9 @@ import BaseColor from '../BaseColor/BaseColor';
 import FilterColorList from '../FilterColorList/FilterColorList';
 import { CloudUpload, Settings, ShareOutlined, ShareRounded } from '@material-ui/icons';
 import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
+import RefreshIcon from '@mui/icons-material/Refresh';
+import { SketchPicker } from 'react-color';
+import ColorizeIcon from '@mui/icons-material/Colorize';
 
 const PaletteGenerator = () => {
     const [hexCode, setHexCode] = useState(Math.floor(Math.random()*16777215).toString(16).toUpperCase());
@@ -19,12 +21,33 @@ const PaletteGenerator = () => {
     const [colorCount, setColorCount] = useState('');
     const [colordata, setColorData] = useState([]);
     const [singlecolor, setSingleColor] = useState([]);
+    const [displayShown, setDisplayShown] = useState(true);
+    const [displayMode, setDisplayMode] = useState('hidden')
     
     useEffect(() => {
       getData()
       getBaseColor()
-    },[])
+    },[generationMode, colorCount, hexCode])
   
+    const [state, setState] = useState({
+      background: '#fff',
+    })
+
+    const handleChangeComplete = (color) => {
+      setState({ background: color.hex });
+      
+      console.log("Hex Color From Color Picker")
+      console.log(color.hex)
+      var s = color.hex.toString();
+      while(s.charAt(0) === '#')
+      {
+      s = s.substring(1);
+      }
+      console.log('S While Loop')
+      console.log(s)
+      setHexCode(s)
+    };
+
     const mixBlendingMode = {
       mixBlendMode: blendingMode
     }
@@ -49,12 +72,30 @@ const PaletteGenerator = () => {
       getBaseColor();
     }
 
+    const handleGen = (e)=>{
+      setHexCode(Math.floor(Math.random()*16777215).toString(16).toUpperCase())
+      setTimeout(200)
+      getData()
+      getBaseColor()
+    }
+
     const handleSelect=(e)=>{
       console.log(e);
       setBlendingMode(e)
     }
     function capitalizeFirstLetter(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    const toggleColorPicker = () => {
+      if(displayShown == true){
+        setDisplayMode('visible')
+        
+      }
+      if(displayShown == false){
+        setDisplayMode('hidden')
+      }
+      setDisplayShown(!displayShown)
     }
 
     const handleCaptureClick = useCallback(async () => {
@@ -67,16 +108,30 @@ const PaletteGenerator = () => {
       <div className="align-center">
         <div>
           <h1>Palette Generator</h1>
-          <form className="searchForm align-center" onSubmit={handleSearch}>
+          
+          {/* <form className="searchForm align-center" onSubmit={handleSearch}> */}
+            
+            <div className='center p-1' id='container'>
 
-            <div>
               <label className='m-1 text-size-medium text-weight-thick'>Base Color</label>
-              <input type='text' value={hexCode} placeholder=''
+              <button className='button' onClick={handleGen}><RefreshIcon fontSize='large'/></button>
+              <button className='button' onClick={toggleColorPicker}><ColorizeIcon fontSize='large'/></button>
+              <div id="container" style={{visibility:displayMode}}>
+                  <div id="infoi">
+                    <SketchPicker
+                    color={ state.background }
+                    onChangeComplete={ handleChangeComplete }
+                    className='overlayed'
+                    />
+                  </div>
+                  
+                </div>
+              
+              <input className='search-input' type='text' value={hexCode} placeholder=''
                 onChange={e => setHexCode(e.target.value)}/>
 
-
               <label className='m-1 text-size-medium text-weight-thick'>Count</label>
-              <input type='number' value={colorCount} placeholder='5'
+              <input className='search-input' type='number' value={colorCount} placeholder='5'
                 onChange={e => e.target.value > 10 ? setColorCount(10) : setColorCount(e.target.value)}/>
               
               
@@ -91,11 +146,9 @@ const PaletteGenerator = () => {
                 <option value="triad">triad</option>
                 <option value="quad">quad</option>
               </select>
-              <input type='submit' value='Generate' className='button'/>
+              {/* <input type='submit' value='Generate' className='button'/> */}
             </div>
-            
-            
-          </form>
+          {/* </form> */}
           <div>
             <div id="color-canvas">
               <BaseColor singlecolor={singlecolor}/>

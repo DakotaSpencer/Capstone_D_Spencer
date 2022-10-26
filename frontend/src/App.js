@@ -1,15 +1,29 @@
-import './App.css';
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import React from 'react';
-import PaletteGenerator from './components/PaletteGenerator/PaletteGenerator';
+import Home from './pages/Home';
+import Explore from './pages/Explore'
+import Navbar from './components/Navbar';
 
-import { ImagePalette } from './components/ImagePalette/ImagePalette';
 
 function App() {
   return (
-    <>
-      <PaletteGenerator/>
-      <ImagePalette/>
-    </>
+    <div className='App'>
+      <BrowserRouter>
+        <Navbar/>
+        <div className='pages'>
+          <Routes>
+            <Route
+              path='/'
+              element={<Home/>}
+            />
+            <Route
+              path='/explore'
+              element={<Explore/>}
+            />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </div>
   );
 }
 

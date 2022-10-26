@@ -3,9 +3,6 @@ import { PhotoOutlined} from '@material-ui/icons';
 
 export const FileInput = props => (
 
-  
-  
-
   <div style={{ marginTop: 20 }}>
     <div className='share-options'>
       <label htmlFor="file" className='share-option'>
