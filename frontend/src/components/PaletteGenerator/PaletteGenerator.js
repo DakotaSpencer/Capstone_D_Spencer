@@ -25,6 +25,15 @@ const PaletteGenerator = () => {
     const [displayMode, setDisplayMode] = useState('hidden')
     
     useEffect(() => {
+      var s = hexCode;
+      while(s.charAt(0) === '#')
+      {
+        s = s.substring(1);
+        
+      }
+      console.log('S While Loop')
+      console.log(s)
+      setHexCode(s)
       getData()
       getBaseColor()
     },[generationMode, colorCount, hexCode])
@@ -53,16 +62,28 @@ const PaletteGenerator = () => {
     }
 
     const getBaseColor = async () => {
-      //https://www.thecolorapi.com/id?format=json&named=false&hex=${hexCode}
-      const result = await axios.get(`https://www.thecolorapi.com/id?hex=${hexCode}`)
-      setSingleColor(result.data)
+      if (hexCode.toString().match(/([0-9a-fA-F]{3}){1,2}/)){
+        //https://www.thecolorapi.com/id?format=json&named=false&hex=${hexCode}
+        const result = await axios.get(`https://www.thecolorapi.com/id?hex=${hexCode}`)
+        setSingleColor(result.data)
+      }else{
+        const result = await axios.get(`https://www.thecolorapi.com/id?hex=123456`)
+        setSingleColor(result.data)
+      }
+      
     }
     
 
     const getData = async () => {
+      if (hexCode.toString().match(/([0-9a-fA-F]{3}){1,2}/)){
+        const results = await axios.get(`https://www.thecolorapi.com/scheme?hex=${hexCode}&mode=${generationMode}&count=${colorCount}`)
+        setColorData(results.data.colors)
+        console.log(results.data.colors)
+      }else{
+        const results = await axios.get(`https://www.thecolorapi.com/scheme?hex=123456&mode=analogic&count=5`)
+        setColorData(results.data.colors)
       //https://www.thecolorapi.com/scheme?hex=${this.hexcolor}&mode=${this.selectedMode}&count=${this.numOfColors}
-      const results = await axios.get(`https://www.thecolorapi.com/scheme?hex=${hexCode}&mode=${generationMode}&count=${colorCount}`)
-      setColorData(results.data.colors)
+      }
     }
   
     const handleSearch = (e) => {
@@ -136,7 +157,7 @@ const PaletteGenerator = () => {
               
               
               <label className='m-1 text-size-medium text-weight-thick'>Generation Mode</label>
-              <select id="modeSelect" value={generationMode} onChange={e => setGenerationMode(e.target.value)}>
+              <select id="modeSelect" className='input' value={generationMode} onChange={e => setGenerationMode(e.target.value)}>
                 <option value="analogic">analogic</option>
                 <option value="analogic-complement">analogic-complement</option>
                 <option value="complement">complement</option>

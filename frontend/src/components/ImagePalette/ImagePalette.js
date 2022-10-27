@@ -29,10 +29,15 @@ export class ImagePalette extends React.Component {
   }
 
   uploadFiles = e => {
-    this.setState({
+    if(this.state.image){
+      this.setState({
       image: window.URL.createObjectURL(e.target.files[0]),
       hasError: false
     })
+    }else{
+      console.log('Nothing was uploaded.')
+    }
+    
   }
 
   getColors = colors => {
