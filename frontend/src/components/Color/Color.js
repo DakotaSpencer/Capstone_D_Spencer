@@ -1,21 +1,15 @@
 import React from 'react'
 import '../ColorList/ColorList.css';
-import {useState,useEffect} from 'react'
+import {useState} from 'react'
 import {LockOpenOutlined, Lock, SwapHoriz } from '@material-ui/icons';
 import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 
 
 
 const Color = ({color}) => {
   const [hexShown, setHexShown] = useState(true);
   const [locked, setLocked] = useState(false);
-  const [viewHex, setViewHex] = useState(false);
   const [blendingMode, setBlendingMode] = useState('normal');
-
-  const mixBlendingMode = {
-    mixBlendMode: blendingMode
-  }
   const handleSelect=(e)=>{
     console.log(e);
     setBlendingMode(e)

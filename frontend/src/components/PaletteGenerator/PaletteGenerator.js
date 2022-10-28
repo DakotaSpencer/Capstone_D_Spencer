@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React from 'react';
+import React, { useRef } from 'react';
 import {useEffect, useState, useCallback} from 'react'
 import ColorList from '../ColorList/ColorList';
 import '../ColorList/ColorList.css'
@@ -8,7 +8,7 @@ import downloadjs from 'downloadjs';
 import html2canvas from 'html2canvas';
 import BaseColor from '../BaseColor/BaseColor';
 import FilterColorList from '../FilterColorList/FilterColorList';
-import { CloudUpload, Settings, ShareOutlined, ShareRounded } from '@material-ui/icons';
+import { CloudUpload, ShareRounded } from '@material-ui/icons';
 import Dropdown from 'react-bootstrap/Dropdown';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { SketchPicker } from 'react-color';
@@ -36,6 +36,7 @@ const PaletteGenerator = () => {
       setHexCode(s)
       getData()
       getBaseColor()
+      executeScroll()
     },[generationMode, colorCount, hexCode])
   
     const [state, setState] = useState({
@@ -56,10 +57,6 @@ const PaletteGenerator = () => {
       console.log(s)
       setHexCode(s)
     };
-
-    const mixBlendingMode = {
-      mixBlendMode: blendingMode
-    }
 
     const getBaseColor = async () => {
       if (hexCode.toString().match(/([0-9a-fA-F]{3}){1,2}/)){
@@ -85,19 +82,13 @@ const PaletteGenerator = () => {
       //https://www.thecolorapi.com/scheme?hex=${this.hexcolor}&mode=${this.selectedMode}&count=${this.numOfColors}
       }
     }
-  
-    const handleSearch = (e) => {
-      e.preventDefault();
-      console.log('User Submitted My Form!');
-      getData();
-      getBaseColor();
-    }
 
     const handleGen = (e)=>{
       setHexCode(Math.floor(Math.random()*16777215).toString(16).toUpperCase())
       setTimeout(200)
       getData()
       getBaseColor()
+      executeScroll()
     }
 
     const handleSelect=(e)=>{
@@ -109,11 +100,11 @@ const PaletteGenerator = () => {
     }
 
     const toggleColorPicker = () => {
-      if(displayShown == true){
+      if(displayShown === true){
         setDisplayMode('visible')
         
       }
-      if(displayShown == false){
+      if(displayShown === false){
         setDisplayMode('hidden')
       }
       setDisplayShown(!displayShown)
@@ -125,6 +116,12 @@ const PaletteGenerator = () => {
       downloadjs(dataURL, 'download.png', 'image/png');
     }, []);
   
+
+    const colorPalette = useRef(null)
+
+    const executeScroll = () => colorPalette.current.scrollIntoView() 
+
+
     return (
       <div className="align-center">
         <div>
@@ -157,7 +154,7 @@ const PaletteGenerator = () => {
               
               
               <label className='m-1 text-size-medium text-weight-thick'>Generation Mode</label>
-              <select id="modeSelect" className='input' value={generationMode} onChange={e => setGenerationMode(e.target.value)}>
+              <select id="modeSelect" className='search-input' value={generationMode} onChange={e => setGenerationMode(e.target.value)}>
                 <option value="analogic">analogic</option>
                 <option value="analogic-complement">analogic-complement</option>
                 <option value="complement">complement</option>
@@ -171,7 +168,7 @@ const PaletteGenerator = () => {
             </div>
           {/* </form> */}
           <div>
-            <div id="color-canvas">
+            <div id="color-canvas" ref={colorPalette}>
               <BaseColor singlecolor={singlecolor}/>
               <ColorList colordata={colordata} singlecolor={singlecolor}/>
               <div style={{backgroundColor:'#323232'}}>

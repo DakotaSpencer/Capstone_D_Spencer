@@ -2,6 +2,10 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .image-container {
   height: fit-content;
 }
@@ -129,7 +133,7 @@ footer {
 
 /* layout */
 :root {
-  --primary: #1aac83;
+  --primary: #33d7a9;
   --error: #e7195a;
 }
 body {
@@ -220,4 +224,7 @@ div.error {
   color: var(--error);
   border-radius: 4px;
   margin: 20px 0;
+}
+input.error{
+  border: 2px solid var(--error);
 }

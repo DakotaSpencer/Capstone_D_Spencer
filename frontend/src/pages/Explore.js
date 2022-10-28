@@ -1,38 +1,38 @@
 import React from 'react'
 
 import { useEffect} from "react";
-import { useWorkoutsContext } from '../hooks/useWorkoutsContext';
+import { usePalettesContext } from '../hooks/usePalettesContext';
 
 
 //components
-import WorkoutDetails from '../components/WorkoutDetails'
-import WorkoutForm from '../components/WorkoutForm';
+import PaletteDetails from '../components/PaletteDetails'
+import PaletteForm from '../components/PaletteForm';
 
 const Explore = () => {
-    const {workouts, dispatch} = useWorkoutsContext()
+    const {palettes, dispatch} = usePalettesContext()
 
     useEffect(() => {
-        const fetchWorkouts = async () =>{
-            const response = await fetch('/api/workouts')
+        const fetchPalettes = async () =>{
+            const response = await fetch('/api/palettes')
             const json = await response.json()
     
     
             if(response.ok){
-                dispatch({type:'SET_WORKOUTS', payload: json})
+                dispatch({type:'SET_PALETTES', payload: json})
             }
         }
     
-        fetchWorkouts()
-    },[])
+        fetchPalettes()
+    },[dispatch])
 
     return (
         <div className='home'>
-            <div className='workouts'>
-                {workouts && workouts.map((workout)=>(
-                    <WorkoutDetails key={workout._id} workout={workout}/>
+            <div className='palettes'>
+                {palettes && palettes.map((palette)=>(
+                    <PaletteDetails key={palette._id} palette={palette}/>
                 ))}
             </div>
-            <WorkoutForm/>
+            <PaletteForm/>
         </div>
     )
 }

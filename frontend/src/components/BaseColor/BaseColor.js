@@ -1,11 +1,9 @@
 import React from 'react'
 import '../ColorList/ColorList.css';
-import {useState,useEffect} from 'react'
-import {LockOpenOutlined, Lock } from '@material-ui/icons';
+import {useState} from 'react'
 
 const BaseColor = (props) => {
     const [hexShown, setHexShown] = useState(true);
-    const [locked, setLocked] = useState(false);
     console.log('singlecolor passed through props')
     if(props.singlecolor.hex){
     console.log(props.singlecolor.hex.clean)
