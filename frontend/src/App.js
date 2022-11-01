@@ -3,6 +3,7 @@ import React from 'react';
 import Home from './pages/Home';
 import Explore from './pages/Explore'
 import Navbar from './components/Navbar';
+import Profile from './pages/Profile';
 
 
 function App() {
@@ -19,6 +20,10 @@ function App() {
             <Route
               path='/explore'
               element={<Explore/>}
+            />
+            <Route
+              path='/profile'
+              element={<Profile/>}
             />
           </Routes>
         </div>
