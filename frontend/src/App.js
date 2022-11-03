@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Explore from './pages/Explore'
 import Navbar from './components/Navbar';
 import Profile from './pages/Profile';
+import UserPalettes from './pages/UserPalettes';
 
 
 function App() {
@@ -24,6 +25,10 @@ function App() {
             <Route
               path='/profile'
               element={<Profile/>}
+            />
+            <Route
+              path='/palettes'
+              element={<UserPalettes/>}
             />
           </Routes>
         </div>
