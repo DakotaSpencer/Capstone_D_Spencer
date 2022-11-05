@@ -167,7 +167,9 @@ const PaletteGenerator = () => {
               {/* <input type='submit' value='Generate' className='button'/> */}
             </div>
           {/* </form> */}
+
           <div>
+            
             <div id="color-canvas" ref={colorPalette}>
               <BaseColor singlecolor={singlecolor}/>
               <ColorList colordata={colordata} singlecolor={singlecolor}/>
@@ -176,8 +178,8 @@ const PaletteGenerator = () => {
                   <FilterColorList colordata={colordata} singlecolor={singlecolor}/>
                 </div>
               </div>
-              <div className='m-2'>
-              <Dropdown onSelect={handleSelect} title={blendingMode}>
+            </div>
+            <Dropdown onSelect={handleSelect} title={blendingMode}>
             <Dropdown.Toggle variant="dark" id="dropdown-basic" title={blendingMode} style={{fontSize:'18px'}}>
               {capitalizeFirstLetter(blendingMode)}
             </Dropdown.Toggle>
@@ -204,11 +206,10 @@ const PaletteGenerator = () => {
                 <Dropdown.Item eventKey="saturation">Saturation</Dropdown.Item>
                 <Dropdown.Item eventKey="color">Color</Dropdown.Item>
                 <Dropdown.Item eventKey="luminosity">Luminosity</Dropdown.Item>
-              </Dropdown.Menu>
+            </Dropdown.Menu>
             </Dropdown>
-            </div>
-            </div>
           </div>
+
           {/* <h5 className='p-2 m-2'>Current Blending Mode: {capitalizeFirstLetter(blendingMode)}</h5> */}
           <div className='align-center center-content p-2'>
             <h3 className='center button text-size-medium m-2 p-2' onClick={handleCaptureClick}>
