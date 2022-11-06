@@ -349,7 +349,7 @@ nav a:active {
 /* auth forms */
 form.signup, form.login {
   max-width: 400px;
-  margin: 40px auto;
+  margin: 60px auto;
   padding: 20px;
   background: #e2f5ff;
   border-radius: 10px;
