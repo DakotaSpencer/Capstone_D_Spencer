@@ -1,5 +1,4 @@
 import React from 'react'
-import '../ColorList/ColorList.css';
 import {useState} from 'react'
 
 const BaseColor = (props) => {

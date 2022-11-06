@@ -1,5 +1,4 @@
 import React from 'react'
-import '../ColorList/ColorList.css';
 import {useState} from 'react'
 import {LockOpenOutlined, Lock, SwapHoriz } from '@material-ui/icons';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -34,9 +33,9 @@ const Color = ({color}) => {
               <div className='clear-button' onClick={() => setHexShown(!hexShown)}>{hexShown? <div><SwapHoriz fontSize='large'/>{color.hex.value}</div>: <div><SwapHoriz fontSize='large'/>R: {color.rgb.r} G: {color.rgb.g} B: {color.rgb.b}</div>}</div>
               <div className='clear-button'>H: {color.hsl.h} S: {color.hsl.s} L: {color.hsl.l}</div>
           </div>
-          <div className={color.hsl.l >= 50 ? "text-dark text-weight-thick clear-button" : "text-light text-weight-thick clear-button"}>
-            <Dropdown onSelect={handleSelect} title={blendingMode}>
-              <Dropdown.Toggle variant="none" id="dropdown-basic" title={blendingMode} style={{fontSize:'18px'}} className={color.hsl.l >= 50 ? "text-dark text-weight-thick clear-button" : "text-light text-weight-thick clear-button"}>
+          <div style={{color: `${color.contrast.value}`}}>
+            <Dropdown onSelect={handleSelect} title={blendingMode} drop='end'>
+              <Dropdown.Toggle variant="none" id="dropdown-basic" title={blendingMode} style={{fontSize:'18px', color: `${color.contrast.value}`}}>
                 {capitalizeFirstLetter(blendingMode)}
               </Dropdown.Toggle>
               <Dropdown.Menu id="dropdown-menu-align-right" title={blendingMode}>

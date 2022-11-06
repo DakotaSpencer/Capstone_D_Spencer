@@ -2,8 +2,6 @@ import React from 'react'
 import { Image } from '../Image/Image'
 import { Swatches } from '../Swatches/Swatches'
 import { FileInput } from '../UploadButton/UploadButton'
-import './imagepalette.css'
-import '../ColorList/ColorList.css'
 
 const IMAGE = 'https://i.imgur.com/pBcut2e.jpeg'
 

@@ -2,7 +2,6 @@ import axios from 'axios'
 import React, { useRef } from 'react';
 import {useEffect, useState, useCallback} from 'react'
 import ColorList from '../ColorList/ColorList';
-import '../ColorList/ColorList.css'
 import DownloadOutlined from '@mui/icons-material/Download';
 import downloadjs from 'downloadjs';
 import html2canvas from 'html2canvas';
@@ -142,7 +141,6 @@ const PaletteGenerator = () => {
                     className='overlayed'
                     />
                   </div>
-                  
                 </div>
               
               <input className='search-input' type='text' value={hexCode} placeholder=''
@@ -179,35 +177,39 @@ const PaletteGenerator = () => {
                 </div>
               </div>
             </div>
-            <Dropdown onSelect={handleSelect} title={blendingMode}>
-            <Dropdown.Toggle variant="dark" id="dropdown-basic" title={blendingMode} style={{fontSize:'18px'}}>
-              {capitalizeFirstLetter(blendingMode)}
-            </Dropdown.Toggle>
-            <Dropdown.Menu alignRight id="dropdown-menu-align-right" title={blendingMode}>
-                <Dropdown.Item eventKey="pass-through">Pass Through</Dropdown.Item>
-                <Dropdown.Item eventKey="normal">Normal</Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item eventKey="darken">Darken</Dropdown.Item>
-                <Dropdown.Item eventKey="multiply">Multiply</Dropdown.Item>
-                <Dropdown.Item eventKey="color-burn">Color Burn</Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item eventKey="lighten">Lighten</Dropdown.Item>
-                <Dropdown.Item eventKey="screen">Screen</Dropdown.Item>
-                <Dropdown.Item eventKey="color-dodge">Color Dodge</Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item eventKey="overlay">Overlay</Dropdown.Item>
-                <Dropdown.Item eventKey="soft-light">Soft Light</Dropdown.Item>
-                <Dropdown.Item eventKey="hard-light">Hard Light</Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item eventKey="difference">Difference</Dropdown.Item>
-                <Dropdown.Item eventKey="exclusion">Exclusion</Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item eventKey="hue">Hue</Dropdown.Item>
-                <Dropdown.Item eventKey="saturation">Saturation</Dropdown.Item>
-                <Dropdown.Item eventKey="color">Color</Dropdown.Item>
-                <Dropdown.Item eventKey="luminosity">Luminosity</Dropdown.Item>
-            </Dropdown.Menu>
-            </Dropdown>
+            <div className='p-2'>
+              <label>Blending Mode: </label>
+              <Dropdown onSelect={handleSelect} title={blendingMode} drop='end'>
+              <Dropdown.Toggle variant="dark" id="dropdown-basic" title={blendingMode} style={{fontSize:'18px'}}>
+                {capitalizeFirstLetter(blendingMode)}
+              </Dropdown.Toggle>
+              <Dropdown.Menu alignRight id="dropdown-menu-align-right" title={blendingMode}>
+                  <Dropdown.Item eventKey="pass-through">Pass Through</Dropdown.Item>
+                  <Dropdown.Item eventKey="normal">Normal</Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item eventKey="darken">Darken</Dropdown.Item>
+                  <Dropdown.Item eventKey="multiply">Multiply</Dropdown.Item>
+                  <Dropdown.Item eventKey="color-burn">Color Burn</Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item eventKey="lighten">Lighten</Dropdown.Item>
+                  <Dropdown.Item eventKey="screen">Screen</Dropdown.Item>
+                  <Dropdown.Item eventKey="color-dodge">Color Dodge</Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item eventKey="overlay">Overlay</Dropdown.Item>
+                  <Dropdown.Item eventKey="soft-light">Soft Light</Dropdown.Item>
+                  <Dropdown.Item eventKey="hard-light">Hard Light</Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item eventKey="difference">Difference</Dropdown.Item>
+                  <Dropdown.Item eventKey="exclusion">Exclusion</Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item eventKey="hue">Hue</Dropdown.Item>
+                  <Dropdown.Item eventKey="saturation">Saturation</Dropdown.Item>
+                  <Dropdown.Item eventKey="color">Color</Dropdown.Item>
+                  <Dropdown.Item eventKey="luminosity">Luminosity</Dropdown.Item>
+              </Dropdown.Menu>
+              </Dropdown>
+            </div>
+            
           </div>
 
           {/* <h5 className='p-2 m-2'>Current Blending Mode: {capitalizeFirstLetter(blendingMode)}</h5> */}
