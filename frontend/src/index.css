@@ -169,7 +169,7 @@ header a:active {
   color: #c3c3c3;
 }
 .pages{
-  margin: 0 auto;
+  margin: 10px auto;
 }
 
 /* homepage */
@@ -177,6 +177,8 @@ header a:active {
   display: grid;
   grid-template-columns: 3fr 1fr;
   gap: 100px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 .workout-details {
   background: #fff;
@@ -267,6 +269,7 @@ nav button {
   transition: border 0.3s linear;
   transition: color 0.3s linear;
   transition: border-radius 0.3s linear;
+  margin-left: 10px;
 }
 
 nav button:hover {

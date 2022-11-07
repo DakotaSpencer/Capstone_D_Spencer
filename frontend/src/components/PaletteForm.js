@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import { usePalettesContext } from '../hooks/usePalettesContext';
+import {useAuthContext} from '../hooks/useAuthContext';
 
 const PaletteForm = () => {
     const {dispatch} = usePalettesContext()
+    const {user} = useAuthContext()
+
     const [title, setTitle] = useState('')
     const [userID, setUserID] = useState('')
     const [colors, setColors] = useState('')
@@ -11,6 +14,10 @@ const PaletteForm = () => {
 
     const handleSubmit = async(e)=>{
         e.preventDefault()
+        if(!user) {
+          setError('You must be logged in before performing this action.')
+          return
+        }
 
         const palette = {title, userID, colors}
     
@@ -18,7 +25,8 @@ const PaletteForm = () => {
       method: 'POST',
       body: JSON.stringify(palette),
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`
       }
     })
     const json = await response.json()

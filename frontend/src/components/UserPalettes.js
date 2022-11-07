@@ -2,18 +2,24 @@ import React from 'react'
 
 import { useEffect} from "react";
 import { usePalettesContext } from '../hooks/usePalettesContext';
+import {useAuthContext} from '../hooks/useAuthContext';
 
 
 //components
 import PaletteDetails from '../components/PaletteDetails'
-import PaletteForm from '../components/PaletteForm';
+import PaletteForm from '../components/PaletteForm'
 
-const Explore = () => {
+const UserPalettes = () => {
     const {palettes, dispatch} = usePalettesContext()
+    const {user} = useAuthContext()
 
     useEffect(() => {
         const fetchPalettes = async () =>{
-            const response = await fetch('/api/palettes')
+            const response = await fetch('/api/palettes', {
+                headers: {
+                    'Authorization': `Bearer ${user.token}`
+                }
+            })
             const json = await response.json()
     
     
@@ -31,10 +37,11 @@ const Explore = () => {
                 {palettes && palettes.map((palette)=>(
                     <PaletteDetails key={palette._id} palette={palette}/>
                 ))}
+                <h5>You've reached the end.</h5>
             </div>
             <PaletteForm/>
         </div>
     )
 }
 
-export default Explore
+export default UserPalettes

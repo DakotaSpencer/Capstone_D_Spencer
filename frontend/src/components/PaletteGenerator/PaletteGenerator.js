@@ -10,7 +10,7 @@ import FilterColorList from '../FilterColorList/FilterColorList';
 import { CloudUpload, ShareRounded } from '@material-ui/icons';
 import Dropdown from 'react-bootstrap/Dropdown';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import { SketchPicker } from 'react-color';
+import { ChromePicker } from 'react-color';
 import ColorizeIcon from '@mui/icons-material/Colorize';
 
 const PaletteGenerator = () => {
@@ -135,7 +135,7 @@ const PaletteGenerator = () => {
               <button className='button' onClick={toggleColorPicker}><ColorizeIcon fontSize='large'/></button>
               <div id="container" style={{visibility:displayMode}}>
                   <div id="infoi">
-                    <SketchPicker
+                    <ChromePicker
                     color={ state.background }
                     onChangeComplete={ handleChangeComplete }
                     className='overlayed'

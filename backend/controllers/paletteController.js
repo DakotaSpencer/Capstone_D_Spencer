@@ -3,8 +3,9 @@ const mongoose = require('mongoose')
 
 //get all palettes/posts
 const getPalettes = async (req, res) =>{
+    const user_id = req.user._id
     //createdAt: -1 sorts all results by creation date in decending order
-    const palettes = await Palette.find({}).sort({createdAt: -1})
+    const palettes = await Palette.find({user_id}).sort({createdAt: -1})
 
     res.status(200).json(palettes)
 }
@@ -48,7 +49,8 @@ const createPalette = async (req, res) => {
     }
     //Add doc to DB
     try{
-        const palette = await Palette.create({title, userID, colors})
+        const user_id = req.user._id
+        const palette = await Palette.create({title, userID, colors, user_id})
         res.status(200).json(palette)
     }catch(error){
         res.status(400).json({error: error.message})

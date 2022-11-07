@@ -1,12 +1,11 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
+import {useAuthContext} from './hooks/useAuthContext';
 import React from 'react';
 
 //Pages and Components
 import Home from './pages/Home';
-import Explore from './pages/Explore'
 import Navbar from './components/Navbar';
 import Profile from './pages/Profile';
-import UserPalettes from './pages/UserPalettes';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Generate from './pages/Generate';
@@ -14,6 +13,8 @@ import ImageGeneration from './pages/ImageGeneration';
 
 
 function App() {
+  const {user} = useAuthContext()
+
   return (
     <div className='App'>
       <BrowserRouter>
@@ -33,24 +34,16 @@ function App() {
               element={<ImageGeneration/>}
             />
             <Route
-              path='/explore'
-              element={<Explore/>}
-            />
-            <Route
               path='/profile'
-              element={<Profile/>}
-            />
-            <Route
-              path='/palettes'
-              element={<UserPalettes/>}
+              element={user?<Profile/>:<Home/>}
             />
             <Route
               path='/login'
-              element={<Login/>}
+              element={!user ?<Login/> : <Navigate to="/profile"/>}
             />
             <Route
               path='/signup'
-              element={<Signup/>}
+              element={!user ?<Signup/> : <Navigate to="/"/>}
             />
           </Routes>
         </div>
