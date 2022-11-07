@@ -178,10 +178,9 @@ const PaletteGenerator = () => {
               </div>
             </div>
             <div className='p-2'>
-              <label>Blending Mode: </label>
               <Dropdown onSelect={handleSelect} title={blendingMode} drop='end'>
-              <Dropdown.Toggle variant="dark" id="dropdown-basic" title={blendingMode} style={{fontSize:'18px'}}>
-                {capitalizeFirstLetter(blendingMode)}
+              <Dropdown.Toggle variant="dark" id="dropdown-basic" title={blendingMode} style={{fontSize:'18px'}}>Blending Mode: 
+                {' ' + capitalizeFirstLetter(blendingMode)}
               </Dropdown.Toggle>
               <Dropdown.Menu alignRight id="dropdown-menu-align-right" title={blendingMode}>
                   <Dropdown.Item eventKey="pass-through">Pass Through</Dropdown.Item>

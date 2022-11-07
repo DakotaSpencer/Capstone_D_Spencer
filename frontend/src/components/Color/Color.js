@@ -2,13 +2,14 @@ import React from 'react'
 import {useState} from 'react'
 import {LockOpenOutlined, Lock, SwapHoriz } from '@material-ui/icons';
 import Dropdown from 'react-bootstrap/Dropdown';
-
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 
 const Color = ({color}) => {
   const [hexShown, setHexShown] = useState(true);
   const [locked, setLocked] = useState(false);
   const [blendingMode, setBlendingMode] = useState('normal');
+  
   const handleSelect=(e)=>{
     console.log(e);
     setBlendingMode(e)
@@ -30,9 +31,13 @@ const Color = ({color}) => {
       <div className='text-weight-thick' style={{backgroundColor : `${color.hex.value}`, height:350, color: `${color.contrast.value}`} }>
           <div className='text-center text-size-medium'>
               <h3 className='text-weight-thick p-0_3'>{color.name.value}</h3>
-              <div className='clear-button' onClick={() => setHexShown(!hexShown)}>{hexShown? <div><SwapHoriz fontSize='large'/>{color.hex.value}</div>: <div><SwapHoriz fontSize='large'/>R: {color.rgb.r} G: {color.rgb.g} B: {color.rgb.b}</div>}</div>
+              <div className='clear-button' onClick={() => setHexShown(!hexShown)}>{hexShown? <div>
+                <SwapHoriz fontSize='large'/>{color.hex.value}</div>: <div><SwapHoriz fontSize='large'/>R: {color.rgb.r} G: {color.rgb.g} B: {color.rgb.b}</div>}</div>
               <div className='clear-button'>H: {color.hsl.h} S: {color.hsl.s} L: {color.hsl.l}</div>
           </div>
+          <CopyToClipboard text={hexShown?color.hex.value:`R: ${color.rgb.r} G: ${color.rgb.g} B: ${color.rgb.b}`}>
+            <button>Copy to clipboard</button>
+          </CopyToClipboard>
           <div style={{color: `${color.contrast.value}`}}>
             <Dropdown onSelect={handleSelect} title={blendingMode} drop='end'>
               <Dropdown.Toggle variant="none" id="dropdown-basic" title={blendingMode} style={{fontSize:'18px', color: `${color.contrast.value}`}}>
