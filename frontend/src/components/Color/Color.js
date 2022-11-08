@@ -3,6 +3,7 @@ import {useState} from 'react'
 import {LockOpenOutlined, Lock, SwapHoriz } from '@material-ui/icons';
 import Dropdown from 'react-bootstrap/Dropdown';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 
 const Color = ({color}) => {
@@ -36,7 +37,7 @@ const Color = ({color}) => {
               <div className='clear-button'>H: {color.hsl.h} S: {color.hsl.s} L: {color.hsl.l}</div>
           </div>
           <CopyToClipboard text={hexShown?color.hex.value:`R: ${color.rgb.r} G: ${color.rgb.g} B: ${color.rgb.b}`}>
-            <button>Copy to clipboard</button>
+            <ContentCopyIcon fontSize='large'/>
           </CopyToClipboard>
           <div style={{color: `${color.contrast.value}`}}>
             <Dropdown onSelect={handleSelect} title={blendingMode} drop='end'>

@@ -142,6 +142,8 @@ body {
 }
 header {
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
   background: #fff;
 }
 header .container {
@@ -1152,11 +1154,11 @@ svg {
 }
 
 .clear-button{
-  padding: 5px;
+  padding: 10px;
   margin: auto;
   background-color: #ffffff00;
   border: none;
-  border-radius: 50px;
+  border-radius: 25px;
   font-size: 20px;
   cursor: pointer;
   max-width: fit-content;
