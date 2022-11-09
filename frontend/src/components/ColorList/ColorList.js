@@ -4,18 +4,20 @@ import '../Color/Color'
 
 const ColorList = (props) => {
     return (
-        <div className="center">
-                {
-                props.colordata.map((color)=>(
-                <div key={color.hex.clean} className="col">
-                    {/* savedIndexes.forEach(index => {
-                        colors[index] = savedColorFromThatIndex
-                    }); */}
-                    <Color color={color}/>
-                </div>
-                ))
-                }
-        </div>
+            <div className="center palette">
+                    {
+                    props.colordata.map((color)=>(
+                    <div key={color.hex.clean} className="col ">
+                        
+                        {/* savedIndexes.forEach(index => {
+                            colors[index] = savedColorFromThatIndex
+                        }); */}
+                        <Color color={color}/>
+                    </div>
+                    ))
+                    }
+            </div>
+        
     )
 }
 

@@ -29,19 +29,23 @@ const Color = ({color}) => {
     //fill array with color that is locked.
     //replace specific color at index with color at same index in array
     <div>
-      <div className='text-weight-thick' style={{backgroundColor : `${color.hex.value}`, height:350, color: `${color.contrast.value}`} }>
-          <div className='text-center text-size-medium'>
-              <h3 className='text-weight-thick p-0_3'>{color.name.value}</h3>
-              <div className='clear-button' onClick={() => setHexShown(!hexShown)}>{hexShown? <div>
-                <SwapHoriz fontSize='large'/>{color.hex.value}</div>: <div><SwapHoriz fontSize='large'/>R: {color.rgb.r} G: {color.rgb.g} B: {color.rgb.b}</div>}</div>
-              <div className='clear-button'>H: {color.hsl.h} S: {color.hsl.s} L: {color.hsl.l}</div>
+      <div className='text-weight-thick flex-container' style={{backgroundColor : `${color.hex.value}`, height:600, color: `${color.contrast.value}`} }>
+          
+          <h2 className='text-weight-thick p-2 m-2 flex-item'>{color.name.value}</h2>
+          <div className='clear-button text-size-small' onClick={() => setHexShown(!hexShown)}>{hexShown? <div><SwapHoriz fontSize='large'/>{color.hex.value}</div>: <div><SwapHoriz fontSize='large'/>R: {color.rgb.r} G: {color.rgb.g} B: {color.rgb.b}</div>}</div>
+          
+          <div className='center text-size-medium hsl'>H: {color.hsl.h} S: {color.hsl.s} L: {color.hsl.l}</div>
+
+          <div className='clear-button'>
+            <CopyToClipboard text={hexShown?color.hex.value:`R: ${color.rgb.r} G: ${color.rgb.g} B: ${color.rgb.b}`} className='flex-item'>
+              <ContentCopyIcon fontSize='large' className='center-item' />
+            </CopyToClipboard>
           </div>
-          <CopyToClipboard text={hexShown?color.hex.value:`R: ${color.rgb.r} G: ${color.rgb.g} B: ${color.rgb.b}`}>
-            <ContentCopyIcon fontSize='large'/>
-          </CopyToClipboard>
-          <div style={{color: `${color.contrast.value}`}}>
+
+          <div className='clear-button flex-item' onClick={() => setLocked(!locked)}>{locked? <Lock fontSize='large'/>: <LockOpenOutlined fontSize='large'/>}</div>
+          <div style={{color: `${color.contrast.value}`}} className='flex-item text-size-large text-weight-thick'>
             <Dropdown onSelect={handleSelect} title={blendingMode} drop='end'>
-              <Dropdown.Toggle variant="none" id="dropdown-basic" title={blendingMode} style={{fontSize:'18px', color: `${color.contrast.value}`}}>
+              <Dropdown.Toggle variant="light" id="dropdown-basic" title={blendingMode} style={{fontSize:'20px'}}>
                 {capitalizeFirstLetter(blendingMode)}
               </Dropdown.Toggle>
               <Dropdown.Menu id="dropdown-menu-align-right" title={blendingMode}>
@@ -71,12 +75,12 @@ const Color = ({color}) => {
           </Dropdown>
           </div>
           
-          <div style={{backgroundColor:'#323232'}}>
+          <div style={{backgroundColor:'#323232'}} className='flex-item'>
             <div style={{mixBlendMode:`${blendingMode}`}}>
-              <div style={{backgroundColor : `${color.hex.value}`, height:50} }></div>
+              <div style={{backgroundColor : `${color.hex.value}`, height:100} }></div>
             </div>
           </div>
-          <div className='clear-button' onClick={() => setLocked(!locked)}>{locked? <Lock fontSize='large'/>: <LockOpenOutlined fontSize='large'/>}</div>
+          
       </div>
     </div>
   )

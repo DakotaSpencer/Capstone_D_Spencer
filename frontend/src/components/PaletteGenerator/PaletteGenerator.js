@@ -12,6 +12,8 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { ChromePicker } from 'react-color';
 import ColorizeIcon from '@mui/icons-material/Colorize';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 const PaletteGenerator = () => {
     const [hexCode, setHexCode] = useState(Math.floor(Math.random()*16777215).toString(16).toUpperCase());
@@ -82,6 +84,15 @@ const PaletteGenerator = () => {
       }
     }
 
+    const addColor = () => {
+      setColorCount(colorCount + 1)
+    }
+
+    const removeColor = () => {
+      //check if color is less than or equal to 1, or over 10, if not do nothing
+      setColorCount(colorCount - 1)
+    }
+
     const handleGen = (e)=>{
       setHexCode(Math.floor(Math.random()*16777215).toString(16).toUpperCase())
       setTimeout(200)
@@ -128,7 +139,7 @@ const PaletteGenerator = () => {
           
           {/* <form className="searchForm align-center" onSubmit={handleSearch}> */}
             
-            <div className='center p-1' id='container'>
+            <div className='center p-1 center-row' id='container'>
 
               <label className='m-1 text-size-medium text-weight-thick'>Base Color</label>
               <button className='button' onClick={handleGen}><RefreshIcon fontSize='large'/></button>
@@ -165,52 +176,22 @@ const PaletteGenerator = () => {
               {/* <input type='submit' value='Generate' className='button'/> */}
             </div>
           {/* </form> */}
-
-          <div>
             
-            <div id="color-canvas" ref={colorPalette}>
+            
+            <div id="color-canvas" ref={colorPalette} className='big'>
               <BaseColor singlecolor={singlecolor}/>
-              <ColorList colordata={colordata} singlecolor={singlecolor}/>
-              <div style={{backgroundColor:'#323232'}}>
-                <div style={{mixBlendMode:`${blendingMode}`}}>
-                  <FilterColorList colordata={colordata} singlecolor={singlecolor}/>
+              <div className='flex-num-buttons'>
+                <div className='left white-circle' onClick={removeColor}>
+                  <RemoveIcon fontSize='large'/>
+                </div>
+                <ColorList colordata={colordata} singlecolor={singlecolor}/>
+                <div className='right white-circle' onClick={addColor}>
+                  <AddIcon fontSize='large'/>
                 </div>
               </div>
+              
             </div>
-            <div className='p-2'>
-              <Dropdown onSelect={handleSelect} title={blendingMode} drop='end'>
-              <Dropdown.Toggle variant="dark" id="dropdown-basic" title={blendingMode} style={{fontSize:'18px'}}>Blending Mode: 
-                {' ' + capitalizeFirstLetter(blendingMode)}
-              </Dropdown.Toggle>
-              <Dropdown.Menu alignRight id="dropdown-menu-align-right" title={blendingMode}>
-                  <Dropdown.Item eventKey="pass-through">Pass Through</Dropdown.Item>
-                  <Dropdown.Item eventKey="normal">Normal</Dropdown.Item>
-                  <Dropdown.Divider />
-                  <Dropdown.Item eventKey="darken">Darken</Dropdown.Item>
-                  <Dropdown.Item eventKey="multiply">Multiply</Dropdown.Item>
-                  <Dropdown.Item eventKey="color-burn">Color Burn</Dropdown.Item>
-                  <Dropdown.Divider />
-                  <Dropdown.Item eventKey="lighten">Lighten</Dropdown.Item>
-                  <Dropdown.Item eventKey="screen">Screen</Dropdown.Item>
-                  <Dropdown.Item eventKey="color-dodge">Color Dodge</Dropdown.Item>
-                  <Dropdown.Divider />
-                  <Dropdown.Item eventKey="overlay">Overlay</Dropdown.Item>
-                  <Dropdown.Item eventKey="soft-light">Soft Light</Dropdown.Item>
-                  <Dropdown.Item eventKey="hard-light">Hard Light</Dropdown.Item>
-                  <Dropdown.Divider />
-                  <Dropdown.Item eventKey="difference">Difference</Dropdown.Item>
-                  <Dropdown.Item eventKey="exclusion">Exclusion</Dropdown.Item>
-                  <Dropdown.Divider />
-                  <Dropdown.Item eventKey="hue">Hue</Dropdown.Item>
-                  <Dropdown.Item eventKey="saturation">Saturation</Dropdown.Item>
-                  <Dropdown.Item eventKey="color">Color</Dropdown.Item>
-                  <Dropdown.Item eventKey="luminosity">Luminosity</Dropdown.Item>
-              </Dropdown.Menu>
-              </Dropdown>
-            </div>
-            
-          </div>
-
+          
           {/* <h5 className='p-2 m-2'>Current Blending Mode: {capitalizeFirstLetter(blendingMode)}</h5> */}
           <div className='align-center center-content p-2'>
             <h3 className='center button text-size-medium m-2 p-2' onClick={handleCaptureClick}>

@@ -1153,6 +1153,90 @@ svg {
   transition: background-color 0.3s linear;
 }
 
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.center-row{
+  display: flex;
+  align-content: center;
+  margin: auto;
+  flex-direction: row;
+  z-index: 99 !important; 
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  max-width: min-content;
+  margin: auto;
+  align-items: center;
+}
+
+.left{
+  position: absolute;
+  left:0;
+  z-index: 99 !important;
+}
+
+.white-circle{
+  background-color: #fff;
+  border-radius: 50%;
+  padding: 10px;
+  margin: auto;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  max-width: fit-content;
+  user-select: none;
+  visibility: visible;
+  transition: border-radius 0.3s linear;
+}
+
+.white-circle:hover{
+  background-color: #fff;
+  border-radius: 25%;
+  padding: 10px;
+  margin: auto;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  max-width: fit-content;
+  user-select: none;
+  visibility: visible;
+  transition: border-radius 0.3s linear;
+}
+
+.right{
+  position: absolute;
+  right: 0;
+  z-index: 99 !important;
+}
+
+.below{
+  position: absolute;
+  min-width: 100%;
+  z-index: 0 !important; 
+}
+
+.palette{
+  min-width: 100%;
+  left: auto;
+}
+
+.flex-num-buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  align-items: center;
+  align-content: stretch;
+}
+
+/* non-essential decorative styles */
 .clear-button{
   padding: 10px;
   margin: auto;
@@ -1165,6 +1249,34 @@ svg {
   user-select: none;
   visibility: visible;
   transition: background-color 0.3s linear;
+}
+
+.hsl{
+  padding: 10px;
+  margin: auto;
+  background-color: #ffffff00;
+  border: none;
+  border-radius: 25px;
+  font-size: 20px;
+  max-width: fit-content;
+  user-select: none;
+  visibility: visible;
+}
+
+.copy-button{
+  margin: auto;
+  min-width: 50px;
+  min-height: 50px;
+}
+
+.copy-button:hover{
+  padding: 10px;
+  background-color: #ffffff6e;
+  transition: background-color 0.3s linear;
+}
+
+.center-item{
+  margin: auto;
 }
 
 .clear-button:hover {
