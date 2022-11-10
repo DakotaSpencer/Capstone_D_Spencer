@@ -190,6 +190,9 @@ header a:active {
   position: relative;
   box-shadow: 2px 2px 5px 5px rgba(0,0,0,0.05);
 }
+
+
+
 .workout-details h4 {
   margin: 0 0 10px 0;
   font-size: 1.2em;
@@ -1176,12 +1179,6 @@ svg {
   align-items: center;
 }
 
-.left{
-  position: absolute;
-  left:0;
-  z-index: 99 !important;
-}
-
 .white-circle{
   background-color: #fff;
   border-radius: 50%;
@@ -1208,12 +1205,26 @@ svg {
   user-select: none;
   visibility: visible;
   transition: border-radius 0.3s linear;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.box_shadow{
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.left{
+  position: absolute;
+  left:0;
+  z-index: 99 !important;
+  margin-left: 10px;
 }
 
 .right{
   position: absolute;
   right: 0;
   z-index: 99 !important;
+  margin-right: 10px;
 }
 
 .below{

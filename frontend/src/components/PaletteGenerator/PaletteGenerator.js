@@ -147,8 +147,6 @@ const PaletteGenerator = () => {
                   </div>
                 </div>
               
-              
-              
               <label className='m-1 text-size-medium text-weight-thick'>Generation Mode</label>
               <select id="modeSelect" className='search-input' value={generationMode} onChange={e => setGenerationMode(e.target.value)}>
                 <option value="analogic">analogic</option>
@@ -165,14 +163,14 @@ const PaletteGenerator = () => {
           {/* </form> */}
             
             
-            <div id="color-canvas" ref={colorPalette} className='big'>
+            <div id="color-canvas"  ref={colorPalette}>
               <BaseColor singlecolor={singlecolor}/>
               <div className='flex-num-buttons'>
-                <div className='left white-circle' onClick={removeColor}>
+                <div className='left white-circle box_shadow' onClick={removeColor}>
                   <RemoveIcon fontSize='large'/>
                 </div>
-                <ColorList colordata={colordata} singlecolor={singlecolor}/>
-                <div className='right white-circle' onClick={addColor}>
+                <ColorList colordata={colordata} singlecolor={singlecolor} />
+                <div className='right white-circle box_shadow' onClick={addColor}>
                   <AddIcon fontSize='large'/>
                 </div>
               </div>
