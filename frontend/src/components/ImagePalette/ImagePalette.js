@@ -40,7 +40,6 @@ export class ImagePalette extends React.Component {
 
   getColors = colors => {
     this.setState(state => ({ colors: [...colors], hasError: false }))
-    console.log(this.state.colors)
   }
 
   handleImage = e => {

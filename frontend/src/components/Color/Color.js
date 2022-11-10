@@ -12,7 +12,6 @@ const Color = ({color}) => {
   const [blendingMode, setBlendingMode] = useState('normal');
   
   const handleSelect=(e)=>{
-    console.log(e);
     setBlendingMode(e)
   }
   function capitalizeFirstLetter(string) {
@@ -29,7 +28,7 @@ const Color = ({color}) => {
     //fill array with color that is locked.
     //replace specific color at index with color at same index in array
     <div>
-      <div className='text-weight-thick flex-container' style={{backgroundColor : `${color.hex.value}`, height:600, color: `${color.contrast.value}`} }>
+      <div className='text-weight-thick flex-container' style={{backgroundColor : `${color.hex.value}`, height:580, color: `${color.contrast.value}`} }>
           
           <h2 className='text-weight-thick p-2 m-2 flex-item'>{color.name.value}</h2>
           <div className='clear-button text-size-small' onClick={() => setHexShown(!hexShown)}>{hexShown? <div><SwapHoriz fontSize='large'/>{color.hex.value}</div>: <div><SwapHoriz fontSize='large'/>R: {color.rgb.r} G: {color.rgb.g} B: {color.rgb.b}</div>}</div>
@@ -37,7 +36,7 @@ const Color = ({color}) => {
           <div className='center text-size-medium hsl'>H: {color.hsl.h} S: {color.hsl.s} L: {color.hsl.l}</div>
 
           <div className='clear-button'>
-            <CopyToClipboard text={hexShown?color.hex.value:`R: ${color.rgb.r} G: ${color.rgb.g} B: ${color.rgb.b}`} className='flex-item'>
+            <CopyToClipboard text={`${color.hex.value}\nR: ${color.rgb.r} G: ${color.rgb.g} B: ${color.rgb.b}\nH: ${color.hsl.h} S: ${color.hsl.s} L: ${color.hsl.l}`} className='flex-item'>
               <ContentCopyIcon fontSize='large' className='center-item' />
             </CopyToClipboard>
           </div>

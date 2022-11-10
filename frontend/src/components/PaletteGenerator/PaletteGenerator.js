@@ -6,24 +6,28 @@ import DownloadOutlined from '@mui/icons-material/Download';
 import downloadjs from 'downloadjs';
 import html2canvas from 'html2canvas';
 import BaseColor from '../BaseColor/BaseColor';
-import FilterColorList from '../FilterColorList/FilterColorList';
 import { CloudUpload, ShareRounded } from '@material-ui/icons';
-import Dropdown from 'react-bootstrap/Dropdown';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { ChromePicker } from 'react-color';
 import ColorizeIcon from '@mui/icons-material/Colorize';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import { TwitterShareButton } from "react-share";
+import {
+  TwitterIcon,
+} from "react-share";
 
 const PaletteGenerator = () => {
     const [hexCode, setHexCode] = useState(Math.floor(Math.random()*16777215).toString(16).toUpperCase());
     const [generationMode, setGenerationMode] = useState('analogic');
-    const [blendingMode, setBlendingMode] = useState('normal');
-    const [colorCount, setColorCount] = useState('');
+    const [colorCount, setColorCount] = useState('5');
     const [colordata, setColorData] = useState([]);
     const [singlecolor, setSingleColor] = useState([]);
     const [displayShown, setDisplayShown] = useState(true);
     const [displayMode, setDisplayMode] = useState('hidden')
+    const [state, setState] = useState({
+      background: '#fff',
+    })
     
     useEffect(() => {
       var s = hexCode;
@@ -32,30 +36,21 @@ const PaletteGenerator = () => {
         s = s.substring(1);
         
       }
-      console.log('S While Loop')
-      console.log(s)
       setHexCode(s)
       getData()
       getBaseColor()
       executeScroll()
     },[generationMode, colorCount, hexCode])
   
-    const [state, setState] = useState({
-      background: '#fff',
-    })
+    
 
     const handleChangeComplete = (color) => {
       setState({ background: color.hex });
-      
-      console.log("Hex Color From Color Picker")
-      console.log(color.hex)
       var s = color.hex.toString();
       while(s.charAt(0) === '#')
       {
       s = s.substring(1);
       }
-      console.log('S While Loop')
-      console.log(s)
       setHexCode(s)
     };
 
@@ -76,7 +71,7 @@ const PaletteGenerator = () => {
       if (hexCode.toString().match(/([0-9a-fA-F]{3}){1,2}/)){
         const results = await axios.get(`https://www.thecolorapi.com/scheme?hex=${hexCode}&mode=${generationMode}&count=${colorCount}`)
         setColorData(results.data.colors)
-        console.log(results.data.colors)
+
       }else{
         const results = await axios.get(`https://www.thecolorapi.com/scheme?hex=123456&mode=analogic&count=5`)
         setColorData(results.data.colors)
@@ -85,12 +80,14 @@ const PaletteGenerator = () => {
     }
 
     const addColor = () => {
-      setColorCount(colorCount + 1)
+      colorCount >= 10 ? setColorCount(10) : setColorCount(parseInt(colorCount) + 1)
+      
     }
 
     const removeColor = () => {
+      colorCount <= 1 ? setColorCount(1) :  setColorCount(parseInt(colorCount) - 1)
       //check if color is less than or equal to 1, or over 10, if not do nothing
-      setColorCount(colorCount - 1)
+    
     }
 
     const handleGen = (e)=>{
@@ -99,14 +96,6 @@ const PaletteGenerator = () => {
       getData()
       getBaseColor()
       executeScroll()
-    }
-
-    const handleSelect=(e)=>{
-      console.log(e);
-      setBlendingMode(e)
-    }
-    function capitalizeFirstLetter(string) {
-      return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
     const toggleColorPicker = () => {
@@ -136,6 +125,10 @@ const PaletteGenerator = () => {
       <div className="align-center">
         <div>
           <h1>Palette Generator</h1>
+          <TwitterShareButton title={"test"} url={"https://www.twitter.com/home"}>
+            <TwitterIcon size={32} round={true} />
+          </TwitterShareButton>
+          
           
           {/* <form className="searchForm align-center" onSubmit={handleSearch}> */}
             
@@ -154,12 +147,6 @@ const PaletteGenerator = () => {
                   </div>
                 </div>
               
-              <input className='search-input' type='text' value={hexCode} placeholder=''
-                onChange={e => setHexCode(e.target.value)}/>
-
-              <label className='m-1 text-size-medium text-weight-thick'>Count</label>
-              <input className='search-input' type='number' value={colorCount} placeholder='5'
-                onChange={e => e.target.value > 10 ? setColorCount(10) : setColorCount(e.target.value)}/>
               
               
               <label className='m-1 text-size-medium text-weight-thick'>Generation Mode</label>
