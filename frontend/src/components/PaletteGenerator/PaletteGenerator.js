@@ -1,6 +1,10 @@
 import axios from 'axios'
 import React, { useRef } from 'react';
 import {useEffect, useState, useCallback} from 'react'
+import {
+  useParams
+} from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import ColorList from '../ColorList/ColorList';
 import DownloadOutlined from '@mui/icons-material/Download';
 import downloadjs from 'downloadjs';
@@ -18,7 +22,8 @@ import {
 } from "react-share";
 
 const PaletteGenerator = () => {
-    const [hexCode, setHexCode] = useState(Math.floor(Math.random()*16777215).toString(16).toUpperCase());
+    let { hex } = useParams();
+    const [hexCode, setHexCode] = useState(hex? hex : Math.floor(Math.random()*16777215).toString(16).toUpperCase());
     const [generationMode, setGenerationMode] = useState('analogic');
     const [colorCount, setColorCount] = useState('5');
     const [colordata, setColorData] = useState([]);
@@ -28,7 +33,8 @@ const PaletteGenerator = () => {
     const [state, setState] = useState({
       background: '#fff',
     })
-    
+    const navigate = useNavigate();
+
     useEffect(() => {
       var s = hexCode;
       while(s.charAt(0) === '#')
@@ -36,6 +42,7 @@ const PaletteGenerator = () => {
         s = s.substring(1);
         
       }
+      
       setHexCode(s)
       getData()
       getBaseColor()
@@ -56,9 +63,11 @@ const PaletteGenerator = () => {
 
     const getBaseColor = async () => {
       if (hexCode.toString().match(/([0-9a-fA-F]{3}){1,2}/)){
+        navigate(`/generate/${hexCode}`);
         //https://www.thecolorapi.com/id?format=json&named=false&hex=${hexCode}
         const result = await axios.get(`https://www.thecolorapi.com/id?hex=${hexCode}`)
         setSingleColor(result.data)
+
       }else{
         const result = await axios.get(`https://www.thecolorapi.com/id?hex=123456`)
         setSingleColor(result.data)

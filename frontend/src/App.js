@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Generate from './pages/Generate';
 import ImageGeneration from './pages/ImageGeneration';
+import Color from './pages/Color';
 
 
 function App() {
@@ -22,8 +23,16 @@ function App() {
         <div className='pages'>
           <Routes>
             <Route
+              path='/:hex'
+              element={<Home/>}
+            />
+            <Route
               path='/'
               element={<Home/>}
+            />
+            <Route
+              path='/generate/:hex'
+              element={<Generate/>}
             />
             <Route
               path='/generate'
@@ -45,6 +54,7 @@ function App() {
               path='/signup'
               element={!user ?<Signup/> : <Navigate to="/"/>}
             />
+            <Route path="/color/:hex" element={<Color/>} />
           </Routes>
         </div>
       </BrowserRouter>

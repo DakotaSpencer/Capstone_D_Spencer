@@ -1247,6 +1247,10 @@ svg {
   align-content: stretch;
 }
 
+.color-link{
+  text-decoration: none;
+}
+
 /* non-essential decorative styles */
 .clear-button{
   padding: 10px;
