@@ -48,16 +48,16 @@ const BaseColor = (props) => {
                     </Link>
                     
                     <div className='flex-row flex-item'>
-                        <button className='button box_shadow'><RefreshIcon fontSize='large'/></button>
+                        <button className='button box_shadow remove'><RefreshIcon fontSize='large'/></button>
                         <div className='clear-button'>{props.singlecolor.hex.value}</div>
 
-                        <div className='clear-button'>
+                        <div className='clear-button remove'>
                             <CopyToClipboard text={`${props.singlecolor.hex.value}\n${props.singlecolor.rgb.value}\n${props.singlecolor.hsl.value}`}>
                                 <ContentCopyIcon fontSize='large' className='center-item' />
                             </CopyToClipboard>
                         </div>
 
-                        <button className='button box_shadow' onClick={toggleColorPicker}><ColorizeIcon fontSize='large'/></button>
+                        <button className='button box_shadow remove' onClick={toggleColorPicker}><ColorizeIcon fontSize='large'/></button>
 
                         <div id="container" style={{visibility:displayMode}}>
                             <div id="infoi">

@@ -119,9 +119,23 @@ const PaletteGenerator = () => {
     }
 
     const handleCaptureClick = useCallback(async () => {
+      var slides = document.getElementsByClassName("remove");
+      
+      console.log(slides)
+      
+      for (var i = 0; i < slides.length; i++) {
+        console.log(slides.item(i));
+        slides.item(i).style.visibility="hidden"
+      }
       const canvas = await html2canvas(document.getElementById('color-canvas'));
+      for (var i = 0; i < slides.length; i++) {
+        console.log(slides.item(i));
+        slides.item(i).style.visibility="visible"
+      }
       const dataURL = canvas.toDataURL('image/png');
       downloadjs(dataURL, 'download.png', 'image/png');
+      
+      
     }, []);
   
 
@@ -175,11 +189,11 @@ const PaletteGenerator = () => {
             <div id="color-canvas"  ref={colorPalette}>
               <BaseColor singlecolor={singlecolor}/>
               <div className='flex-num-buttons'>
-                <div className='left white-circle box_shadow' onClick={removeColor}>
+                <div className='left white-circle box_shadow remove' onClick={removeColor}>
                   <RemoveIcon fontSize='large'/>
                 </div>
                 <ColorList colordata={colordata} singlecolor={singlecolor} />
-                <div className='right white-circle box_shadow' onClick={addColor}>
+                <div className='right white-circle box_shadow remove' onClick={addColor}>
                   <AddIcon fontSize='large'/>
                 </div>
               </div>

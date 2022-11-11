@@ -1251,21 +1251,6 @@ svg {
   text-decoration: none;
 }
 
-.color{
-  animation: fadeInAnimation ease 1s;
-  animation-iteration-count: 1;
-  animation-fill-mode: backwards;
-}
-
-@keyframes fadeInAnimation {
-  0% {
-      opacity: 0;
-  }
-  100% {
-      opacity: 1;
-  }
-}
-
 /* non-essential decorative styles */
 .clear-button{
   padding: 10px;
@@ -1279,6 +1264,11 @@ svg {
   user-select: none;
   visibility: visible;
   transition: background-color 0.3s linear;
+}
+
+.remove{
+  visibility: visible;
+  transition: visibility 0.1s linear;
 }
 
 .hsl{
