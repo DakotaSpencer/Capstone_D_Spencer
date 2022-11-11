@@ -42,12 +42,11 @@ const PaletteGenerator = () => {
         s = s.substring(1);
         
       }
-      
       setHexCode(s)
       getData()
       getBaseColor()
       executeScroll()
-    },[generationMode, colorCount, hexCode])
+    },[generationMode, colorCount, hexCode, hex])
   
     
 
@@ -67,12 +66,10 @@ const PaletteGenerator = () => {
         //https://www.thecolorapi.com/id?format=json&named=false&hex=${hexCode}
         const result = await axios.get(`https://www.thecolorapi.com/id?hex=${hexCode}`)
         setSingleColor(result.data)
-
       }else{
         const result = await axios.get(`https://www.thecolorapi.com/id?hex=123456`)
         setSingleColor(result.data)
       }
-      
     }
     
 
@@ -80,11 +77,14 @@ const PaletteGenerator = () => {
       if (hexCode.toString().match(/([0-9a-fA-F]{3}){1,2}/)){
         const results = await axios.get(`https://www.thecolorapi.com/scheme?hex=${hexCode}&mode=${generationMode}&count=${colorCount}`)
         setColorData(results.data.colors)
-
+        if(results.data.colors[0].hex.clean === '000000' && results.data.colors[0].hex.clean === '000000'){
+          navigate('/')
+        }else(
+          console.log(results.data)
+        )
       }else{
         const results = await axios.get(`https://www.thecolorapi.com/scheme?hex=123456&mode=analogic&count=5`)
         setColorData(results.data.colors)
-      //https://www.thecolorapi.com/scheme?hex=${this.hexcolor}&mode=${this.selectedMode}&count=${this.numOfColors}
       }
     }
 
@@ -150,7 +150,7 @@ const PaletteGenerator = () => {
                   <div id="infoi">
                     <ChromePicker
                     color={ state.background }
-                    onChangeComplete={ handleChangeComplete }
+                    onChange={ handleChangeComplete }
                     className='overlayed'
                     />
                   </div>

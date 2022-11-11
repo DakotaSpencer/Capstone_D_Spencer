@@ -8,7 +8,6 @@ import {
   Link,
 } from "react-router-dom";
 
-
 const Color = ({color}) => {
   const [hexShown, setHexShown] = useState(true);
   const [locked, setLocked] = useState(false);
@@ -16,6 +15,7 @@ const Color = ({color}) => {
   
   const handleSelect=(e)=>{
     setBlendingMode(e)
+    console.log(blendingMode)
   }
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -30,18 +30,18 @@ const Color = ({color}) => {
     //create array of empty objects
     //fill array with color that is locked.
     //replace specific color at index with color at same index in array
-    <div>
-      <div className='text-weight-thick flex-container' style={{backgroundColor : `${color.hex.value}`, height:580, color: `${color.contrast.value}`} }>
+    <div style={{backgroundColor:'#555'}}>
+      <div className='text-weight-thick flex-container color' style={{backgroundColor : `${color.hex.value}`, height:580, color: `${color.contrast.value}`} }>
           <Link to={`/color/${color.hex.clean}`} className='color-link' style={{color: `${color.contrast.value}`}}>
             <h2 className='text-weight-thick p-2 m-2 flex-item'>{color.name.value}</h2>
           </Link>
           
-          <div className='clear-button text-size-small' onClick={() => setHexShown(!hexShown)}>{hexShown? <div><SwapHoriz fontSize='large'/>{color.hex.value}</div>: <div><SwapHoriz fontSize='large'/>R: {color.rgb.r} G: {color.rgb.g} B: {color.rgb.b}</div>}</div>
+          <div className='clear-button text-size-small' onClick={() => setHexShown(!hexShown)}>{hexShown? <div><SwapHoriz fontSize='large'/>{color.hex.value}</div>: <div><SwapHoriz fontSize='large'/>{color.rgb.value}</div>}</div>
           
-          <div className='center text-size-medium hsl'>H: {color.hsl.h} S: {color.hsl.s} L: {color.hsl.l}</div>
+          <div className='center text-size-medium hsl'>{color.hsl.value}</div>
 
           <div className='clear-button'>
-            <CopyToClipboard text={`${color.hex.value}\nR: ${color.rgb.r} G: ${color.rgb.g} B: ${color.rgb.b}\nH: ${color.hsl.h} S: ${color.hsl.s} L: ${color.hsl.l}`} className='flex-item'>
+            <CopyToClipboard text={`${color.hex.value}\n${color.rgb.value}\n${color.hsl.value}`} className='flex-item'>
               <ContentCopyIcon fontSize='large' className='center-item' />
             </CopyToClipboard>
           </div>
