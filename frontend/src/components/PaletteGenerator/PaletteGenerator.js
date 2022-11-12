@@ -16,10 +16,10 @@ import { ChromePicker } from 'react-color';
 import ColorizeIcon from '@mui/icons-material/Colorize';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { TwitterShareButton } from "react-share";
-import {
-  TwitterIcon,
-} from "react-share";
+// import { TwitterShareButton } from "react-share";
+// import {
+//   TwitterIcon,
+// } from "react-share";
 
 const PaletteGenerator = () => {
     let { hex } = useParams();
@@ -128,9 +128,9 @@ const PaletteGenerator = () => {
         slides.item(i).style.visibility="hidden"
       }
       const canvas = await html2canvas(document.getElementById('color-canvas'));
-      for (var i = 0; i < slides.length; i++) {
+      for (var n = 0; n < slides.length; n++) {
         console.log(slides.item(i));
-        slides.item(i).style.visibility="visible"
+        slides.item(n).style.visibility="visible"
       }
       const dataURL = canvas.toDataURL('image/png');
       downloadjs(dataURL, 'download.png', 'image/png');
@@ -148,12 +148,10 @@ const PaletteGenerator = () => {
       <div className="align-center">
         <div>
           <h1>Palette Generator</h1>
-          <TwitterShareButton title={"test"} url={"https://www.twitter.com/home"}>
+
+          {/* <TwitterShareButton title={"test"} url={"https://www.twitter.com/home"}>
             <TwitterIcon size={32} round={true} />
-          </TwitterShareButton>
-          
-          
-          {/* <form className="searchForm align-center" onSubmit={handleSearch}> */}
+          </TwitterShareButton> */}
             
             <div className='center p-1 center-row' id='container'>
 
