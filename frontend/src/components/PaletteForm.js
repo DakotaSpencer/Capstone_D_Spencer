@@ -7,7 +7,6 @@ const PaletteForm = () => {
     const {user} = useAuthContext()
 
     const [title, setTitle] = useState('')
-    const [userID, setUserID] = useState('')
     const [colors, setColors] = useState('')
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
@@ -19,7 +18,7 @@ const PaletteForm = () => {
           return
         }
 
-        const palette = {title, userID, colors}
+        const palette = {title, colors}
     
     const response = await fetch('/api/palettes', {
       method: 'POST',
@@ -38,7 +37,6 @@ const PaletteForm = () => {
       if (response.ok) {
         setError(null)
         setTitle('')
-        setUserID('')
         setColors('')
         setEmptyFields([])
         console.log('new palette added:', json)
@@ -58,15 +56,6 @@ const PaletteForm = () => {
                 value={title}
                 className={emptyFields.includes('title')? 'error': ''}
             />
-
-            <label>Should be User ID (but will be done and removed later):</label>
-            <input
-                type={'number'}
-                onChange={(e)=>setUserID(e.target.value)}
-                value={userID}
-                className={emptyFields.includes('userID')? 'error': ''}
-            />
-
             <label>Colors. Will be removed and replaced with color palette generated before.:</label>
             <input
                 type={'text'}

@@ -31,15 +31,12 @@ const getPalette = async(req,res)=>{
 
 //create a new workout/post
 const createPalette = async (req, res) => {
-    const {title, userID, colors} = req.body
+    const {title, colors} = req.body
 
     let emptyFields = []
 
     if(!title){
         emptyFields.push('title')
-    }
-    if(!userID){
-        emptyFields.push('userID')
     }
     if(!colors){
         emptyFields.push('colors')
@@ -50,7 +47,7 @@ const createPalette = async (req, res) => {
     //Add doc to DB
     try{
         const user_id = req.user._id
-        const palette = await Palette.create({title, userID, colors, user_id})
+        const palette = await Palette.create({title, colors, user_id})
         res.status(200).json(palette)
     }catch(error){
         res.status(400).json({error: error.message})
