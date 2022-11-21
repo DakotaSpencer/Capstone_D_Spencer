@@ -58,7 +58,8 @@ const Color = ({color}) => {
 
           <div className='clear-button flex-item remove' onClick={() => setLocked(!locked)}>{locked? <Lock fontSize='large'/>: <LockOpenOutlined fontSize='large'/>}</div>
           <div style={{color: `${color.contrast.value}`}} className='flex-row text-size-large text-weight-thick remove'>
-            <RemoveRedEyeIcon className='m-2' fontSize='large'/>
+            {/* <RemoveRedEyeIcon className='m-2' fontSize='large'/> */}
+            <h5 className='m-2'>Colorblind:</h5>
             <Dropdown onSelect={handleBlindnessSelect} title={blindnessMode} drop='end'>
                 <Dropdown.Toggle variant="light" id="dropdown-basic" title={blindnessMode} style={{fontSize:'20px'}}>
                   {capitalizeFirstLetter(blindnessMode)}
@@ -84,7 +85,8 @@ const Color = ({color}) => {
             </Dropdown>
           </div>
           <div style={{color: `${color.contrast.value}`}} className='flex-row text-size-large text-weight-thick remove'>
-            <BrushIcon className='m-2 center' fontSize='large'/>
+            {/* <BrushIcon className='m-2 center' fontSize='large'/> */}
+            <h5 className='m-2'>Blending:</h5>
             <Dropdown onSelect={handleSelect} title={blendingMode} drop='end'>
               <Dropdown.Toggle variant="light" id="dropdown-basic" title={blendingMode} style={{fontSize:'20px'}}>
                 {capitalizeFirstLetter(blendingMode)}

@@ -221,6 +221,7 @@ const PaletteGenerator = () => {
                     />
                   </div>
                 </div>
+              <h4 className='m-2'>Generation:</h4>
               <Dropdown onSelect={handleSelect} title={generationMode} drop='end'>
               <Dropdown.Toggle variant="dark" id="dropdown-basic" title={generationMode} style={{fontSize:'20px'}}>
                 {capitalizeFirstLetter(generationMode)}
