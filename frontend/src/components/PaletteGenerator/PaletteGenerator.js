@@ -16,6 +16,9 @@ import { ChromePicker } from 'react-color';
 import ColorizeIcon from '@mui/icons-material/Colorize';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import { usePalettesContext } from '../../hooks/usePalettesContext';
+import {useAuthContext} from '../../hooks/useAuthContext';
+import Dropdown from 'react-bootstrap/Dropdown';
 // import { TwitterShareButton } from "react-share";
 // import {
 //   TwitterIcon,
@@ -30,6 +33,12 @@ const PaletteGenerator = () => {
     const [singlecolor, setSingleColor] = useState([]);
     const [displayShown, setDisplayShown] = useState(true);
     const [displayMode, setDisplayMode] = useState('hidden')
+    const {dispatch} = usePalettesContext()
+    const {user} = useAuthContext()
+    const [title, setTitle] = useState('')
+    const [colors, setColors] = useState(colordata)
+    const [error, setError] = useState(null)
+    const [emptyFields, setEmptyFields] = useState([])
     const [state, setState] = useState({
       background: '#fff',
     })
@@ -46,9 +55,46 @@ const PaletteGenerator = () => {
       getData()
       getBaseColor()
       executeScroll()
+      
     },[generationMode, colorCount, hexCode, hex])
-  
+
+    var blinder = require('color-blind');
+    blinder.protanopia('#42dead'); // result: "#d1c4a0"
+
+    const handleSubmit = async(e)=>{
+        e.preventDefault()
+        if(!user) {
+          setError('You must be logged in before performing this action.')
+          return
+        }
+
+        const palette = {title, colors}
     
+    const response = await fetch('/api/palettes', {
+      method: 'POST',
+      body: JSON.stringify(palette),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`
+      }
+    })
+    const json = await response.json()
+
+    if (!response.ok) {
+        setError(json.error)
+        setEmptyFields(json.emptyFields)
+      }
+      if (response.ok) {
+        setError(null)
+        setTitle('')
+        setColors('')
+        setEmptyFields([])
+        console.log('new palette added:', json)
+        dispatch({
+          type: 'CREATE_PALETTE', payload: json
+        })
+      }
+    }
 
     const handleChangeComplete = (color) => {
       setState({ background: color.hex });
@@ -137,6 +183,14 @@ const PaletteGenerator = () => {
       
       
     }, []);
+
+    const handleSelect=(e)=>{
+      setGenerationMode(e)
+      console.log(generationMode)
+    }
+    function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
   
 
     const colorPalette = useRef(null)
@@ -155,7 +209,7 @@ const PaletteGenerator = () => {
             
             <div className='center p-1 center-row' id='container'>
 
-              <label className='m-1 text-size-medium text-weight-thick'>Base Color</label>
+              {/* <label className='m-1 text-size-medium text-weight-thick'>Base Color</label> */}
               <button className='button' onClick={handleGen}><RefreshIcon fontSize='large'/></button>
               <button className='button' onClick={toggleColorPicker}><ColorizeIcon fontSize='large'/></button>
               <div id="container" style={{visibility:displayMode}}>
@@ -167,21 +221,24 @@ const PaletteGenerator = () => {
                     />
                   </div>
                 </div>
+              <Dropdown onSelect={handleSelect} title={generationMode} drop='end'>
+              <Dropdown.Toggle variant="dark" id="dropdown-basic" title={generationMode} style={{fontSize:'20px'}}>
+                {capitalizeFirstLetter(generationMode)}
+              </Dropdown.Toggle>
+              <Dropdown.Menu id="dropdown-menu-align-right" title={generationMode}>
+                  <Dropdown.Item eventKey="analogic">Analogic</Dropdown.Item>
+                  <Dropdown.Item eventKey="analogic-complement">Analogic Complement</Dropdown.Item>
+                  <Dropdown.Item eventKey="complement">Complement</Dropdown.Item>
+                  <Dropdown.Item eventKey="monochrome">Monochrome</Dropdown.Item>
+                  <Dropdown.Item eventKey="monochrome-dark">Monochrome Dark</Dropdown.Item>
+                  <Dropdown.Item eventKey="monochrome-light">Monochrome Light</Dropdown.Item>
+                  <Dropdown.Item eventKey="triad">Triad</Dropdown.Item>
+                  <Dropdown.Item eventKey="quad">Quad</Dropdown.Item>
+                  <Dropdown.Divider />
+                </Dropdown.Menu>
+          </Dropdown>
               
-              <label className='m-1 text-size-medium text-weight-thick'>Generation Mode</label>
-              <select id="modeSelect" className='search-input' value={generationMode} onChange={e => setGenerationMode(e.target.value)}>
-                <option value="analogic">analogic</option>
-                <option value="analogic-complement">analogic-complement</option>
-                <option value="complement">complement</option>
-                <option value="monochrome">monochrome</option>
-                <option value="monochrome-dark">monochrome-dark</option>
-                <option value="monochrome-light">monochrome-light</option>
-                <option value="triad">triad</option>
-                <option value="quad">quad</option>
-              </select>
-              {/* <input type='submit' value='Generate' className='button'/> */}
             </div>
-          {/* </form> */}
             
             
             <div id="color-canvas"  ref={colorPalette}>
@@ -210,6 +267,30 @@ const PaletteGenerator = () => {
               <ShareRounded className='m-0_2'/><div className='m-1'>Share Palette</div>
             </h3>
           </div>
+          {user?
+          <div>
+            <form className='create' onSubmit={handleSubmit}>
+              <h3>Add a New Palette</h3>
+              <label>Palette Title:</label>
+              <input
+                  type={'text'}
+                  onChange={(e)=>setTitle(e.target.value)}
+                  value={singlecolor.name?singlecolor.name.value:''}
+                  className={emptyFields.includes('title')? 'error': ''}
+              />
+              <label>Colors. Will be removed and replaced with color palette generated before.:</label>
+              <input
+                  type={'text'}
+                  onChange={(e)=>setColors(e.target.value)}
+                  value={colordata}
+                  className={emptyFields.includes('colors')? 'error': ''}
+              />
+              <button>Add Palette</button>
+              {error && <div className='error'>{error}</div>}
+            </form>
+          </div>:<div></div>}
+          
+          
         </div>
       </div>
     );

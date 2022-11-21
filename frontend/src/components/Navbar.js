@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import { useLogout } from '../hooks/useLogout'
 import { useAuthContext } from '../hooks/useAuthContext'
+import BurgerMenu from './BurgerMenu';
 
 
 const Navbar = () => {
@@ -13,6 +14,7 @@ const Navbar = () => {
   }
   return (
     <header>
+      <BurgerMenu/>
         <div className='container'>
             
             <Link to="/">
