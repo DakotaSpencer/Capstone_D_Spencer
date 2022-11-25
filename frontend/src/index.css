@@ -1383,10 +1383,10 @@ svg {
 /* Position and sizing of burger button */
 .bm-burger-button {
   position:absolute;
-  width: 36px;
+  width: 30px;
   height: 30px;
   margin-top: 1%;
-  margin-left: 1%;
+  margin-left: 2%;
 }
 
 /* Color/shape of burger icon bars */

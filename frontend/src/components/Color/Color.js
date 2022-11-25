@@ -1,18 +1,19 @@
 import React from 'react'
 import {useState} from 'react'
-import {LockOpenOutlined, Lock, SwapHoriz } from '@material-ui/icons';
+// import {LockOpenOutlined, Lock} from '@material-ui/icons';
+import {SwapHoriz } from '@material-ui/icons';
 import Dropdown from 'react-bootstrap/Dropdown';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import BrushIcon from '@mui/icons-material/Brush';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+// import BrushIcon from '@mui/icons-material/Brush';
+// import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import {
   Link,
 } from "react-router-dom";
 
 const Color = ({color}) => {
   const [hexShown, setHexShown] = useState(true);
-  const [locked, setLocked] = useState(false);
+  // const [locked, setLocked] = useState(false);
   const [blendingMode, setBlendingMode] = useState('normal');
   const [blindnessMode, setBlindnessMode] = useState('no filter');
   var blinder = require('color-blind');
@@ -56,7 +57,7 @@ const Color = ({color}) => {
             </CopyToClipboard>
           </div>
 
-          <div className='clear-button flex-item remove' onClick={() => setLocked(!locked)}>{locked? <Lock fontSize='large'/>: <LockOpenOutlined fontSize='large'/>}</div>
+          {/* <div className='clear-button flex-item remove' onClick={() => setLocked(!locked)}>{locked? <Lock fontSize='large'/>: <LockOpenOutlined fontSize='large'/>}</div> */}
           <div style={{color: `${color.contrast.value}`}} className='flex-row text-size-large text-weight-thick remove'>
             {/* <RemoveRedEyeIcon className='m-2' fontSize='large'/> */}
             <h5 className='m-2'>Colorblind:</h5>

@@ -7,7 +7,6 @@ import {useAuthContext} from '../hooks/useAuthContext';
 
 //components
 import PaletteDetails from '../components/PaletteDetails'
-import PaletteForm from '../components/PaletteForm'
 
 const UserPalettes = () => {
     const {palettes, dispatch} = usePalettesContext()

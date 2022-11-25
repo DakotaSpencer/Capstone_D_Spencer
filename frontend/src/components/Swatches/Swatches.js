@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom';
 
 const renderSwatches = (type, colors) => {
-  const [linkColor, setLinkColor] = useState('')
 
   return colors.map((color, id) => {
     const normalizeColorValue =

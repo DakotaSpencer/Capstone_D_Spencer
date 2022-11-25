@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useRef } from 'react';
 import {useEffect, useState, useCallback} from 'react'
 import {
+  Link,
   useParams
 } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
@@ -21,10 +22,10 @@ import {useAuthContext} from '../../hooks/useAuthContext';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-// import { TwitterShareButton } from "react-share";
-// import {
-//   TwitterIcon,
-// } from "react-share";
+import { FacebookIcon, FacebookShareButton, LinkedinIcon, LinkedinShareButton, PinterestIcon, PinterestShareButton, RedditIcon, RedditShareButton, TumblrIcon, TumblrShareButton, TwitterShareButton } from "react-share";
+import {
+  TwitterIcon,
+} from "react-share";
 
 const PaletteGenerator = () => {
     let { hex } = useParams();
@@ -45,11 +46,13 @@ const PaletteGenerator = () => {
       background: '#fff',
     })
     const navigate = useNavigate();
-    const [saving, setSaving] = useState(false)
     const [show, setShow] = useState(false);
+    const [showShare, setShowShare] = useState(false);
 
     const handleClose = () => setShow(false);
+    const handleShareClose = () => setShowShare(false);
     const handleShow = () => setShow(true);
+    const handleShowShare = () => setShowShare(true);
 
     useEffect(() => {
       var s = hexCode;
@@ -133,8 +136,11 @@ const PaletteGenerator = () => {
     const savePalette = () => {
       setTitle(singlecolor.name.value)
       setColors(singlecolor.hex.clean)
-      setSaving(true)
       handleShow()
+    }
+
+    const sharePalette = () => {
+      handleShowShare()
     }
 
     const getData = async () => {
@@ -219,10 +225,6 @@ const PaletteGenerator = () => {
       <div className="align-center">
         <div>
           <h1>Palette Generator</h1>
-
-          {/* <TwitterShareButton title={"test"} url={"https://www.twitter.com/home"}>
-            <TwitterIcon size={32} round={true} />
-          </TwitterShareButton> */}
             
             <div className='center p-1 center-row' id='container'>
 
@@ -233,7 +235,7 @@ const PaletteGenerator = () => {
                   <div id="infoi">
                     <ChromePicker
                     color={ state.background }
-                    onChange={ handleChangeComplete }
+                    onChangeComplete={ handleChangeComplete }
                     className='overlayed'
                     />
                   </div>
@@ -272,8 +274,6 @@ const PaletteGenerator = () => {
               </div>
               
             </div>
-          
-          {/* <h5 className='p-2 m-2'>Current Blending Mode: {capitalizeFirstLetter(blendingMode)}</h5> */}
           <div className='align-center center-content p-2'>
             <h3 className='center button text-size-medium m-2 p-2' onClick={handleCaptureClick}>
               <DownloadOutlined /><div className='m-1'>Download</div>
@@ -281,39 +281,102 @@ const PaletteGenerator = () => {
             <h3 className='center button text-size-medium m-2 p-2' onClick={savePalette}>
               <CloudUpload className='m-0_2'/><div className='m-1'>Save Palette</div>
             </h3>
-            <h3 className='center button text-size-medium m-2 p-2'>
+            <h3 className='center button text-size-medium m-2 p-2' onClick={sharePalette}>
               <ShareRounded className='m-0_2'/><div className='m-1'>Share Palette</div>
             </h3>
           </div>
-            <Modal show={show} onHide={handleClose}>
-              <Modal.Body>
-                <form className='create' onSubmit={handleSubmit}>
-                  <h3>Would you like to name this palette?</h3>
-                  <label>Palette Title:</label>
-                  <input
-                      type={'text'}
-                      onChange={(e)=>setTitle(e.target.value)}
-                      value={title}
-                      className={emptyFields.includes('title')? 'error': ''}
-                  />
-                  <input
-                      type={'text'}
-                      //onChange={(e)=>setColors(singlecolor.hex?singlecolor.hex.value:'')}
-                      value={colors}
-                      className={emptyFields.includes('colors')? 'error': ''}
-                      disabled={true}
-                      style={{opacity:'1%'}}
-                  />
-                  <button>Add Palette</button>
-                  {error && <div className='error'>{error}</div>}
-                </form>
-              </Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                  Close
-                </Button>
-              </Modal.Footer>
-            </Modal>
+            {user?
+              <Modal show={show} onHide={handleClose}>
+                <Modal.Body>
+                  <form className='create' onSubmit={handleSubmit}>
+                    <h3>Would you like to name this palette?</h3>
+                    <label>Palette Title:</label>
+                    <input
+                        type={'text'}
+                        onChange={(e)=>setTitle(e.target.value)}
+                        value={title}
+                        className={emptyFields.includes('title')? 'error': ''}
+                    />
+                    <input
+                        type={'text'}
+                        value={colors}
+                        className={emptyFields.includes('colors')? 'error': ''}
+                        disabled={true}
+                        style={{opacity:'1%'}}
+                    />
+                    <button>Add Palette</button>
+                    {error && <div className='error'>{error}</div>}
+                  </form>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleClose}>
+                    Close
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+            :
+              <Modal show={show} onHide={handleClose}>
+                <Modal.Body>
+                  <h3>You must be logged in to save palettes!</h3>
+                  <p>If you don't want to log in, you can still share the pelette to thse social media's:</p>
+                  <div>
+                    <TwitterShareButton title={"Check out this cool palette I generated!"} url={'http://colors.com/generate/' + hexCode} className='m-1'>
+                      <TwitterIcon size={64} round={true} />
+                    </TwitterShareButton>
+                    <FacebookShareButton title={"Check out this cool palette I generated!"} url={'http://colors.com/generate/' + hexCode} className='m-1'>
+                      <FacebookIcon size={64} round={true}/>
+                    </FacebookShareButton>
+                    <TumblrShareButton title={"Check out this cool palette I generated!"} url={'http://colors.com/generate/' + hexCode} className='m-1'>
+                      <TumblrIcon size={64} round={true}/>
+                    </TumblrShareButton>
+                    <RedditShareButton title={"Check out this cool palette I generated!"} url={'http://colors.com/generate/' + hexCode} className='m-1'>
+                      <RedditIcon size={64} round={true}/>
+                    </RedditShareButton>
+                    <LinkedinShareButton title={"Check out this cool palette I generated!"} url={'http://colors.com/generate/' + hexCode} className='m-1'>
+                      <LinkedinIcon size={64} round={true}/>
+                    </LinkedinShareButton>
+                    <PinterestShareButton title={"Check out this cool palette I generated!"} url={'http://colors.com/generate/' + hexCode} className='m-1'>
+                      <PinterestIcon size={64} round={true}/>
+                    </PinterestShareButton>
+                  </div>
+                  <p fontSize={'16px'}>Alternatively, you can also <Link to={'/login'}>Log In</Link> or <Link to={'signup'}>Sign Up</Link></p>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleClose}>
+                    OK
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+            }
+
+              <Modal show={showShare} onHide={handleShareClose}>
+                <Modal.Body>
+                  <h3>Please choose one of the options below!</h3>
+                  <p>Choose a sharing option below:</p>
+                  <div>
+                    <TwitterShareButton title={"Check out this cool palette I generated!"} url={'http://colors.com/generate/' + hexCode} className='m-1'>
+                      <TwitterIcon size={64} round={true} />
+                    </TwitterShareButton>
+                    <FacebookShareButton title={"Check out this cool palette I generated!"} url={'http://colors.com/generate/' + hexCode} className='m-1'>
+                      <FacebookIcon size={64} round={true}/>
+                    </FacebookShareButton>
+                    <TumblrShareButton title={"Check out this cool palette I generated!"} url={'http://colors.com/generate/' + hexCode} className='m-1'>
+                      <TumblrIcon size={64} round={true}/>
+                    </TumblrShareButton>
+                    <RedditShareButton title={"Check out this cool palette I generated!"} url={'http://colors.com/generate/' + hexCode} className='m-1'>
+                      <RedditIcon size={64} round={true}/>
+                    </RedditShareButton>
+                    <LinkedinShareButton title={"Check out this cool palette I generated!"} url={'http://colors.com/generate/' + hexCode} className='m-1'>
+                      <LinkedinIcon size={64} round={true}/>
+                    </LinkedinShareButton>
+                  </div>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleShareClose}>
+                    OK
+                  </Button>
+                </Modal.Footer>
+              </Modal>
         </div>
       </div>
     );
