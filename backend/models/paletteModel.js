@@ -8,7 +8,7 @@ const paletteSchema = new Schema({
         required:true
     },
     colors:{
-        type:Array,
+        type:String,
         required:true
     },
     user_id:{

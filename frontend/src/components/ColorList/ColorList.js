@@ -7,7 +7,7 @@ const ColorList = (props) => {
             <div className="center palette">
                     {
                     props.colordata.map((color)=>(
-                    <div key={color.hex.clean} className="col ">
+                    <div key={color.hex.clean} className="col">
                         
                         {/* savedIndexes.forEach(index => {
                             colors[index] = savedColorFromThatIndex

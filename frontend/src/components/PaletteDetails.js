@@ -1,15 +1,38 @@
 import { Delete } from '@material-ui/icons';
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {usePalettesContext} from '../hooks/usePalettesContext'
 import {useAuthContext} from '../hooks/useAuthContext';
-
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import { Link } from 'react-router-dom';
 
 
 const PaletteDetails = ({palette}) => {
   const {dispatch} = usePalettesContext()
   const {user} = useAuthContext()
+  const [hexCode, setHexCode] = useState(palette.colors);
+  const [colordata, setColorData] = useState([]);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    getData()
+  },[])
+
+  const getData = async () => {
+    if (hexCode.toString().match(/([0-9a-fA-F]{3}){1,2}/)){
+      const results = await axios.get(`https://www.thecolorapi.com/scheme?hex=${hexCode}&mode=analogic&count=5`)
+      setColorData(results.data.colors)
+      if(results.data.colors[0].hex.clean === '000000' && results.data.colors[0].hex.clean === '000000'){
+        navigate('/')
+      }else(
+        console.log(results.data)
+      )
+    }else{
+      const results = await axios.get(`https://www.thecolorapi.com/scheme?hex=123456&mode=analogic&count=5`)
+      setColorData(results.data.colors)
+    }
+  }
 
   const handleClick = async() => {
     if(!user){
@@ -31,12 +54,24 @@ const PaletteDetails = ({palette}) => {
     }
   }
   return (
-    <div className='workout-details'>
-        <h4>{palette.title}</h4>
-        <p><strong>User ID: </strong>{palette.userID}</p>
-        <p><strong>Colors: </strong>{palette.colors}</p>
+    <div className='palette-details'>
+        <h4><Link to={`/generate/${palette.colors}`} className='link'>{palette.title}</Link></h4>
+        <p><strong>Base Color: </strong>#{palette.colors}</p>
         <p>Created {formatDistanceToNow(new Date(palette.createdAt), {addSuffix: true})}</p>
         <span class="" onClick={handleClick}><Delete/></span>
+        <div className='color-details'>
+          {
+            colordata.map((color)=>(
+            <div key={color.hex.clean} className="col">
+                {/* savedIndexes.forEach(index => {
+                    colors[index] = savedColorFromThatIndex
+                }); */}
+                {/* <Color color={color}/> */}
+                <div className='col' style={{backgroundColor : `${color.hex.value}`, height:'50px', color:`${color.contrast.value}`}}>{color.hex.value}</div>
+            </div>
+            ))
+          }
+        </div>
     </div>
   )
 }

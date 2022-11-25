@@ -182,7 +182,7 @@ header a:active {
   margin-left: 20px;
   margin-right: 20px;
 }
-.workout-details {
+.palette-details {
   background: #fff;
   border-radius: 4px;
   margin: 20px;
@@ -193,17 +193,16 @@ header a:active {
 
 
 
-.workout-details h4 {
+.palette-details h4 {
   margin: 0 0 10px 0;
   font-size: 1.2em;
-  color: var(--primary);
 }
-.workout-details p {
+.palette-details p {
   margin: 0;
   font-size: 0.9em;
   color: #555;
 }
-.workout-details span {
+.palette-details span {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -214,7 +213,6 @@ header a:active {
   color: #333;
 }
 
-/* new workout form */
 label, input {
   display: block;
 }

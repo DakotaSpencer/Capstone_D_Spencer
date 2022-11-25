@@ -32,14 +32,15 @@ const UserPalettes = () => {
     },[dispatch])
 
     return (
-        <div className='home'>
-            <div className='palettes'>
+        <div className='home'>{
+            palettes?<div className='palettes center'>
                 {palettes && palettes.map((palette)=>(
                     <PaletteDetails key={palette._id} palette={palette}/>
                 ))}
-                <h5>You've reached the end.</h5>
+                
             </div>
-            <PaletteForm/>
+            :<h5>You don't have any palettes saved. Click <a href='/'>here</a> to go generate some!</h5>
+        }
         </div>
     )
 }

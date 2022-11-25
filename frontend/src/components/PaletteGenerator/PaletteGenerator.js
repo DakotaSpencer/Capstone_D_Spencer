@@ -19,6 +19,8 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import { usePalettesContext } from '../../hooks/usePalettesContext';
 import {useAuthContext} from '../../hooks/useAuthContext';
 import Dropdown from 'react-bootstrap/Dropdown';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 // import { TwitterShareButton } from "react-share";
 // import {
 //   TwitterIcon,
@@ -36,13 +38,18 @@ const PaletteGenerator = () => {
     const {dispatch} = usePalettesContext()
     const {user} = useAuthContext()
     const [title, setTitle] = useState('')
-    const [colors, setColors] = useState(colordata)
+    const [colors, setColors] = useState('')
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
     const [state, setState] = useState({
       background: '#fff',
     })
     const navigate = useNavigate();
+    const [saving, setSaving] = useState(false)
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     useEffect(() => {
       var s = hexCode;
@@ -59,28 +66,32 @@ const PaletteGenerator = () => {
     },[generationMode, colorCount, hexCode, hex])
 
     var blinder = require('color-blind');
-    blinder.protanopia('#42dead'); // result: "#d1c4a0"
+    blinder.protanopia('#42dead');
 
     const handleSubmit = async(e)=>{
-        e.preventDefault()
-        if(!user) {
-          setError('You must be logged in before performing this action.')
-          return
-        }
-
-        const palette = {title, colors}
-    
-    const response = await fetch('/api/palettes', {
-      method: 'POST',
-      body: JSON.stringify(palette),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${user.token}`
+      console.log(colors)
+      console.log(title)
+      e.preventDefault()
+      if(!user) {
+        setError('You must be logged in before performing this action.')
+        return
       }
-    })
-    const json = await response.json()
+      console.log(singlecolor)
+      console.log("TITLE: " + title)
+      console.log("COLORS: " + colors)
+      const palette = {title, colors}
+    
+      const response = await fetch('/api/palettes', {
+        method: 'POST',
+        body: JSON.stringify(palette),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.token}`
+        }
+      })
+      const json = await response.json()
 
-    if (!response.ok) {
+      if (!response.ok) {
         setError(json.error)
         setEmptyFields(json.emptyFields)
       }
@@ -93,6 +104,7 @@ const PaletteGenerator = () => {
         dispatch({
           type: 'CREATE_PALETTE', payload: json
         })
+        navigate('/profile')
       }
     }
 
@@ -118,6 +130,12 @@ const PaletteGenerator = () => {
       }
     }
     
+    const savePalette = () => {
+      setTitle(singlecolor.name.value)
+      setColors(singlecolor.hex.clean)
+      setSaving(true)
+      handleShow()
+    }
 
     const getData = async () => {
       if (hexCode.toString().match(/([0-9a-fA-F]{3}){1,2}/)){
@@ -191,7 +209,6 @@ const PaletteGenerator = () => {
     function capitalizeFirstLetter(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
     }
-  
 
     const colorPalette = useRef(null)
 
@@ -261,37 +278,42 @@ const PaletteGenerator = () => {
             <h3 className='center button text-size-medium m-2 p-2' onClick={handleCaptureClick}>
               <DownloadOutlined /><div className='m-1'>Download</div>
             </h3>
-            <h3 className='center button text-size-medium m-2 p-2'>
+            <h3 className='center button text-size-medium m-2 p-2' onClick={savePalette}>
               <CloudUpload className='m-0_2'/><div className='m-1'>Save Palette</div>
             </h3>
             <h3 className='center button text-size-medium m-2 p-2'>
               <ShareRounded className='m-0_2'/><div className='m-1'>Share Palette</div>
             </h3>
           </div>
-          {user?
-          <div>
-            <form className='create' onSubmit={handleSubmit}>
-              <h3>Add a New Palette</h3>
-              <label>Palette Title:</label>
-              <input
-                  type={'text'}
-                  onChange={(e)=>setTitle(e.target.value)}
-                  value={singlecolor.name?singlecolor.name.value:''}
-                  className={emptyFields.includes('title')? 'error': ''}
-              />
-              <label>Colors. Will be removed and replaced with color palette generated before.:</label>
-              <input
-                  type={'text'}
-                  onChange={(e)=>setColors(e.target.value)}
-                  value={colordata}
-                  className={emptyFields.includes('colors')? 'error': ''}
-              />
-              <button>Add Palette</button>
-              {error && <div className='error'>{error}</div>}
-            </form>
-          </div>:<div></div>}
-          
-          
+            <Modal show={show} onHide={handleClose}>
+              <Modal.Body>
+                <form className='create' onSubmit={handleSubmit}>
+                  <h3>Would you like to name this palette?</h3>
+                  <label>Palette Title:</label>
+                  <input
+                      type={'text'}
+                      onChange={(e)=>setTitle(e.target.value)}
+                      value={title}
+                      className={emptyFields.includes('title')? 'error': ''}
+                  />
+                  <input
+                      type={'text'}
+                      //onChange={(e)=>setColors(singlecolor.hex?singlecolor.hex.value:'')}
+                      value={colors}
+                      className={emptyFields.includes('colors')? 'error': ''}
+                      disabled={true}
+                      style={{opacity:'1%'}}
+                  />
+                  <button>Add Palette</button>
+                  {error && <div className='error'>{error}</div>}
+                </form>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+              </Modal.Footer>
+            </Modal>
         </div>
       </div>
     );
