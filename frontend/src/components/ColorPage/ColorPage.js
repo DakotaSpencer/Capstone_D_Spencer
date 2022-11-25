@@ -40,7 +40,7 @@ const ColorPage = (props) => {
             <div className='center'>
                 <div className='text-weight-thick flex-container p-2 m-2 box_shadow'>
                     <div className='text-weight-thick flex-container p-2 m-2' id='color-canvas' style={{backgroundColor : `${blindnessMode!=='no filter'? blinder[blindnessMode](props.singlecolor.hex.value):props.singlecolor.hex.value}`, width:500, height:'fit-content' , color: `${props.singlecolor.contrast.value}`} }>
-                        <div className='text-size-medium p-2 m-2' style={{fontFamily:'Montserrat', fontWeight:200, fontSize:'48px'}}>{props.singlecolor.name.value}</div>
+                        <div className='text-size-medium p-2 m-2' style={{fontFamily:'Montserrat', fontSize:'48px'}}>{props.singlecolor.name.value}</div>
                         <div className='text-size-medium p-2 m-2'>HEX: {props.singlecolor.hex.value}</div>
                         <div className='text-size-medium p-2 m-2'>HSL: {props.singlecolor.hsl.value}</div>
                         <div className='text-size-medium p-2 m-2'>HSV: {props.singlecolor.hsv.value}</div>

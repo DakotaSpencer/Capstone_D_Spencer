@@ -32,10 +32,10 @@ const UserPalettes = () => {
     },[dispatch])
 
     return (
-        <div className='home'>{
-            palettes?<div className='palettes center'>
+        <div className='home' style={{margin:'auto'}}>{
+            palettes?<div className='palettes colcontainer' >
                 {palettes && palettes.map((palette)=>(
-                    <PaletteDetails key={palette._id} palette={palette}/>
+                    <PaletteDetails className='item' key={palette._id} palette={palette}/>
                 ))}
                 
             </div>

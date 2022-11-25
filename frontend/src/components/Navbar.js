@@ -26,7 +26,7 @@ const Navbar = () => {
             <nav>
               {user &&(
                 <div>
-                <span><a href='/profile' className='link'>{user.email}</a></span>
+                <span><a href='/profile' className='link'>My Palettes</a></span>
                 <button onClick={handleClick} className='logout'>Log out</button>
               </div>
               )}

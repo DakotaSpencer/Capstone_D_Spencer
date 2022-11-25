@@ -11,6 +11,24 @@ html {
   height: fit-content;
 }
 
+
+.item {
+  width: 100%
+}
+
+.colcontainer {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.colcontainer > div {
+  flex-basis: 0 50%; /* or - flex: 0 50% - or - flex-basis: 50% - */
+  /*demo*/
+  margin-bottom: 10px;
+}
+
+
 .swatches {
   width: 100px;
   height: 100px;
@@ -178,23 +196,20 @@ header a:active {
 .home {
   display: grid;
   grid-template-columns: 3fr 1fr;
-  gap: 100px;
+  width: 100%;
   margin-left: 20px;
   margin-right: 20px;
 }
 .palette-details {
-  background: #fff;
-  border-radius: 4px;
-  margin: 20px;
-  padding: 20px;
   position: relative;
-  box-shadow: 2px 2px 5px 5px rgba(0,0,0,0.05);
+  width: 100%;
+  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 
 
 
 .palette-details h4 {
-  margin: 0 0 10px 0;
+  margin: 15px 0 10px 0;
   font-size: 1.2em;
 }
 .palette-details p {
@@ -209,6 +224,7 @@ header a:active {
   cursor: pointer;
   background: #f1f1f1;
   padding: 6px;
+  margin-right: 15px;
   border-radius: 50%;
   color: #333;
 }
@@ -1167,6 +1183,38 @@ svg {
   margin: auto;
   flex-direction: row;
   z-index: 99 !important; 
+}
+
+.iibox {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;  /* for demo purpose  */
+}
+
+.stack-top {
+  z-index: 9;
+  margin: 0.5em;
+  padding: 0.5em; /* for demo purpose  */
+}
+
+.color-container{
+  display: flex;
+  flex-direction: row;
+  z-index: 0;
+}
+
+.color-box {
+  flex: 1;
+}
+
+.info {
+  position: relative;
+  top: 0px;
+  z-index: 1;
 }
 
 .flex-row {

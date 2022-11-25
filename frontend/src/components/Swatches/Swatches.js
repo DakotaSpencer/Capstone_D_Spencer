@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 
 const renderSwatches = (type, colors) => {
+  const [linkColor, setLinkColor] = useState('')
+
   return colors.map((color, id) => {
     const normalizeColorValue =
       Array.isArray(color) && type === 'rgb'
@@ -16,7 +19,7 @@ const renderSwatches = (type, colors) => {
             color: normalizeColorValue
           }}
         />
-        <div className="center-content hex-codes">{color}</div>
+        <div className="center-content hex-codes"><Link to={`/color/${normalizeColorValue.substring(1)}`}>{color}</Link></div>
       </div>
     )
   })

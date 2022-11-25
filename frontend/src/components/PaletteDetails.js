@@ -55,23 +55,28 @@ const PaletteDetails = ({palette}) => {
   }
   return (
     <div className='palette-details'>
-        <h4><Link to={`/generate/${palette.colors}`} className='link'>{palette.title}</Link></h4>
-        <p><strong>Base Color: </strong>#{palette.colors}</p>
-        <p>Created {formatDistanceToNow(new Date(palette.createdAt), {addSuffix: true})}</p>
-        <span class="" onClick={handleClick}><Delete/></span>
-        <div className='color-details'>
-          {
-            colordata.map((color)=>(
-            <div key={color.hex.clean} className="col">
-                {/* savedIndexes.forEach(index => {
-                    colors[index] = savedColorFromThatIndex
-                }); */}
-                {/* <Color color={color}/> */}
-                <div className='col' style={{backgroundColor : `${color.hex.value}`, height:'50px', color:`${color.contrast.value}`}}>{color.hex.value}</div>
+            <div classname="iibox" style={{opacity:'50%'}}>
+              <div className='color-details color-container'>
+                {
+                  colordata.map((color)=>(
+                  <div key={color.hex.clean} className="color-box">
+                      {/* savedIndexes.forEach(index => {
+                          colors[index] = savedColorFromThatIndex
+                      }); */}
+                      {/* <Color color={color}/> */}
+                      <div className='' style={{backgroundColor : `${color.hex.value}`, color:`${color.contrast.value}`, height:'150px', width:'space-evenly'}}></div>
+                  </div>
+                  ))
+                }
+              </div>
             </div>
-            ))
-          }
-        </div>
+            <div className="iibox stack-top" style={{opacity:'100%'}}>
+              <span className="box_shadow" onClick={handleClick}><Delete/></span>
+              <h4 className='' style={{ width: 'max-content', marginBottom:'20px'}}><Link to={`/generate/${palette.colors}`} className='link box_shadow'>{palette.title}</Link></h4>
+              <p className='' style={{width: 'max-content', marginTop:'8px'}}><strong>Base Color: </strong>#{palette.colors}</p>
+              <p className='' style={{width: 'max-content'}}>Created {formatDistanceToNow(new Date(palette.createdAt), {addSuffix: true})}</p>
+            </div>
+        
     </div>
   )
 }
