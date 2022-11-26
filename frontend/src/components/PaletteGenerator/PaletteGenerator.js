@@ -339,7 +339,7 @@ const PaletteGenerator = () => {
                       <PinterestIcon size={64} round={true}/>
                     </PinterestShareButton>
                   </div>
-                  <p fontSize={'16px'}>Alternatively, you can also <Link to={'/login'}>Log In</Link> or <Link to={'signup'}>Sign Up</Link></p>
+                  <p fontSize={'16px'}>Alternatively, you can also <Link to={'/login'}>Log In</Link> or <Link to={'/signup'}>Sign Up</Link></p>
                 </Modal.Body>
                 <Modal.Footer>
                   <Button variant="secondary" onClick={handleClose}>
