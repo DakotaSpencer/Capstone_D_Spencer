@@ -254,7 +254,6 @@ const PaletteGenerator = () => {
                   <Dropdown.Item eventKey="monochrome-light">Monochrome Light</Dropdown.Item>
                   <Dropdown.Item eventKey="triad">Triad</Dropdown.Item>
                   <Dropdown.Item eventKey="quad">Quad</Dropdown.Item>
-                  <Dropdown.Divider />
                 </Dropdown.Menu>
           </Dropdown>
               

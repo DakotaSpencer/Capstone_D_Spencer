@@ -16,6 +16,7 @@ const PaletteDetails = ({palette}) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    setHexCode(palette.colors.toString())
     getData()
   },[])
 
