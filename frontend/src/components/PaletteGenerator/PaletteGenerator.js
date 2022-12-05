@@ -159,7 +159,7 @@ const PaletteGenerator = () => {
     }
 
     const addColor = () => {
-      colorCount >= 6 ? setColorCount(6) : setColorCount(parseInt(colorCount) + 1)
+      colorCount >= 8 ? setColorCount(8) : setColorCount(parseInt(colorCount) + 1)
       
     }
 

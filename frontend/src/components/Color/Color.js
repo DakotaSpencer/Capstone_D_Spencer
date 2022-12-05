@@ -44,7 +44,7 @@ const Color = ({color}) => {
     <div style={{backgroundColor:'#555'}}>
       <div className='text-weight-thick flex-container' style={{backgroundColor : `${blindnessMode!=='no filter'? blinder[blindnessMode](color.hex.value):color.hex.value}`, height:455, color: `${color.contrast.value}`} }>
           <Link to={`/color/${color.hex.clean}`} className='color-link' style={{color: `${color.contrast.value}`}}>
-            <h2 className='text-weight-thick p-2 m-2 flex-item'>{color.name.value}</h2>
+            <h3 className='text-weight-thick p-2 m-2 flex-item'>{color.name.value}</h3>
           </Link>
           
           <div className='clear-button text-size-small' onClick={() => setHexShown(!hexShown)}>{hexShown? <div><SwapHoriz fontSize='large'/>{color.hex.value}</div>: <div><SwapHoriz fontSize='large'/>{color.rgb.value}</div>}</div>
@@ -58,7 +58,7 @@ const Color = ({color}) => {
           </div>
 
           {/* <div className='clear-button flex-item remove' onClick={() => setLocked(!locked)}>{locked? <Lock fontSize='large'/>: <LockOpenOutlined fontSize='large'/>}</div> */}
-          <div style={{color: `${color.contrast.value}`}} className='flex-row text-size-large text-weight-thick remove'>
+          <div style={{color: `${color.contrast.value}`}} className='col m-0 p-2 text-size-large text-weight-thick remove'>
             {/* <RemoveRedEyeIcon className='m-2' fontSize='large'/> */}
             <h5 className='m-2'>Colorblind:</h5>
             <Dropdown onSelect={handleBlindnessSelect} title={blindnessMode} drop='end'>
@@ -85,7 +85,7 @@ const Color = ({color}) => {
                   </Dropdown.Menu>
             </Dropdown>
           </div>
-          <div style={{color: `${color.contrast.value}`}} className='flex-row text-size-large text-weight-thick remove'>
+          <div style={{color: `${color.contrast.value}`}} className='col m-0 p-2 text-size-large text-weight-thick remove'>
             {/* <BrushIcon className='m-2 center' fontSize='large'/> */}
             <h5 className='m-2'>Blending:</h5>
             <Dropdown onSelect={handleSelect} title={blendingMode} drop='end'>

@@ -7,13 +7,13 @@ const BurgerMenu = () => {
     <div>
       <Menu elastic>
         <ul>
-          <li>
+          {/* <li>
               <a className="menu-item" href="/">
                 <h3>
                   Home
                 </h3>
               </a>
-          </li>
+          </li> */}
           <li>
               <a className="menu-item" href="/image">
                 <h3>Image Generator</h3>
