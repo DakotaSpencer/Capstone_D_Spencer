@@ -64,7 +64,7 @@ const PaletteGenerator = () => {
       setHexCode(s)
       getData()
       getBaseColor()
-      executeScroll()
+      //executeScroll()
       
     },[generationMode, colorCount, hexCode, hex])
 
@@ -118,8 +118,11 @@ const PaletteGenerator = () => {
       {
       s = s.substring(1);
       }
+      setTimeout(200)
       setHexCode(s)
-      setDisplayMode('hidden'?'shown':'hidden')
+      executeScroll()
+      // setDisplayShown(!displayShown)
+      // setDisplayMode('hidden')
     };
 
     const handleColorChange= (color) => {
@@ -130,7 +133,7 @@ const PaletteGenerator = () => {
       s = s.substring(1);
       }
       setHexCode(s)
-      setDisplayMode('hidden'?'shown':'hidden')
+      //setDisplayMode('hidden'?'shown':'hidden')
     };
 
     const getBaseColor = async () => {
@@ -159,7 +162,7 @@ const PaletteGenerator = () => {
       if (hexCode.toString().match(/([0-9a-fA-F]{3}){1,2}/)){
         const results = await axios.get(`https://www.thecolorapi.com/scheme?hex=${hexCode}&mode=${generationMode}&count=${colorCount}`)
         setColorData(results.data.colors)
-        if(results.data.colors[0].hex.clean === '000000' && results.data.colors[0].hex.clean === '000000'){
+        if(results.data.colors[0].hex.clean === '000000' && results.data.colors[0].hex.clean === '000000'|| results.data.colors[0].hex.clean === 'FFFFFF'){
           navigate('/')
         }else(
           console.log(results.data)
@@ -240,7 +243,6 @@ const PaletteGenerator = () => {
             
             <div className='center p-1 center-row' id='container'>
 
-              {/* <label className='m-1 text-size-medium text-weight-thick'>Base Color</label> */}
               <button className='button' onClick={handleGen}><RefreshIcon fontSize='large'/></button>
               <button className='button' onClick={toggleColorPicker}><ColorizeIcon fontSize='large'/></button>
               <div id="container" style={{visibility:displayMode}}>
