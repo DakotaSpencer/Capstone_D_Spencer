@@ -16,7 +16,7 @@ const BurgerMenu = () => {
           </li> */}
           <li>
               <a className="menu-item" href="/image">
-                <h3>Image Generator</h3>
+                <h3>Image To Palette</h3>
               </a>
           </li>
           <li>

@@ -119,6 +119,18 @@ const PaletteGenerator = () => {
       s = s.substring(1);
       }
       setHexCode(s)
+      setDisplayMode('hidden'?'shown':'hidden')
+    };
+
+    const handleColorChange= (color) => {
+      setState({ background: color.hex });
+      var s = color.hex.toString();
+      while(s.charAt(0) === '#')
+      {
+      s = s.substring(1);
+      }
+      setHexCode(s)
+      setDisplayMode('hidden'?'shown':'hidden')
     };
 
     const getBaseColor = async () => {
@@ -234,7 +246,8 @@ const PaletteGenerator = () => {
               <div id="container" style={{visibility:displayMode}}>
                   <div id="infoi">
                     <ChromePicker
-                    color={ state.background }
+                    color={ hex?"#" + hexCode: state.background }
+                    onChange={handleColorChange}
                     onChangeComplete={ handleChangeComplete }
                     className='overlayed'
                     />
