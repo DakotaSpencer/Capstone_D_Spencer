@@ -121,8 +121,6 @@ const PaletteGenerator = () => {
       setTimeout(200)
       setHexCode(s)
       executeScroll()
-      // setDisplayShown(!displayShown)
-      // setDisplayMode('hidden')
     };
 
     const handleColorChange= (color) => {
@@ -233,7 +231,13 @@ const PaletteGenerator = () => {
 
     const colorPalette = useRef(null)
 
-    const executeScroll = () => colorPalette.current.scrollIntoView() 
+    const executeScroll = () => {
+      console.log("scroll locked")
+      //colorPalette.current.scrollIntoView() 
+      //setTimeout(2000)
+      //setDisplayShown(!displayShown)
+      //setDisplayMode('hidden')
+    }
 
 
     return (
