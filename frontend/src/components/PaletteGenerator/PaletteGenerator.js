@@ -336,7 +336,7 @@ const PaletteGenerator = () => {
               <Modal show={show} onHide={handleClose}>
                 <Modal.Body>
                   <h3>You must be logged in to save palettes!</h3>
-                  <p>If you don't want to log in, you can still share the pelette to thse social media's:</p>
+                  <p>If you don't want to log in, you can still share the pelette to these social media's:</p>
                   <div>
                     <TwitterShareButton title={"Check out this cool palette I generated!"} url={'http://colors.com/generate/' + hexCode} className='m-1'>
                       <TwitterIcon size={64} round={true} />
