@@ -1407,7 +1407,7 @@ svg {
 
 /* Color/shape of close button cross */
 .bm-cross {
-  background: #bdc3c7;
+  background: #171718;
 }
 
 /*
@@ -1421,7 +1421,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* General sidebar styles */
 .bm-menu {
-  background: #373a4759;
+  background: #ffffffb7;
   font-size: 1.15em;
 }
 
@@ -1437,7 +1437,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* Individual item */
 .bm-item {
-  /* display: inline-block; */
+  display: inline-block;
 }
 
 /* Styling of overlay */
