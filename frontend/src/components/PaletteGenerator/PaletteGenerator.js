@@ -217,8 +217,6 @@ const PaletteGenerator = () => {
       }
       const dataURL = canvas.toDataURL('image/png');
       downloadjs(dataURL, 'colorPalette.png', 'image/png');
-      
-      
     }, []);
 
     const handleSelect=(e)=>{
