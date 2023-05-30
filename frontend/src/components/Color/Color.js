@@ -52,7 +52,7 @@ const Color = ({color}) => {
           <div className='center text-size-medium hsl'>{color.hsl.value}</div>
 
           <div className='clear-button'>
-            <CopyToClipboard text={`${color.hex.value}\n${color.rgb.value}\n${color.hsl.value}`} className='flex-item remove'>
+            <CopyToClipboard text={`${color.name.value}:\n\n${color.hex.value}\n${color.rgb.value}\n${color.hsl.value}`} className='flex-item remove'>
               <ContentCopyIcon fontSize='large' className='center-item' />
             </CopyToClipboard>
           </div>

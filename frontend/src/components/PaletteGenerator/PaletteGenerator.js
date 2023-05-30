@@ -216,7 +216,7 @@ const PaletteGenerator = () => {
         slides.item(n).style.visibility="visible"
       }
       const dataURL = canvas.toDataURL('image/png');
-      downloadjs(dataURL, 'download.png', 'image/png');
+      downloadjs(dataURL, 'colorPalette.png', 'image/png');
       
       
     }, []);
@@ -243,8 +243,6 @@ const PaletteGenerator = () => {
     return (
       <div className="align-center">
         <div>
-          <h1>Palette Generator</h1>
-            
             <div className='center p-1 center-row' id='container'>
 
               <button className='button' onClick={handleGen}><RefreshIcon fontSize='large'/></button>
@@ -259,7 +257,7 @@ const PaletteGenerator = () => {
                     />
                   </div>
                 </div>
-              <h4 className='m-2'>Generation:</h4>
+              <h4 className='m-2'>Generation Mode:</h4>
               <Dropdown onSelect={handleSelect} title={generationMode} drop='end'>
               <Dropdown.Toggle variant="dark" id="dropdown-basic" title={generationMode} style={{fontSize:'20px'}}>
                 {capitalizeFirstLetter(generationMode)}
@@ -338,22 +336,22 @@ const PaletteGenerator = () => {
                   <h3>You must be logged in to save palettes!</h3>
                   <p>If you don't want to log in, you can still share the pelette to these social media's:</p>
                   <div>
-                    <TwitterShareButton title={"Check out this cool palette I generated!"} url={'http://colors.com/generate/' + hexCode} className='m-1'>
+                    <TwitterShareButton title={"Check out this cool palette I generated!"} url={'http://localhost:3000/generate/' + hexCode} className='m-1'>
                       <TwitterIcon size={64} round={true} />
                     </TwitterShareButton>
-                    <FacebookShareButton title={"Check out this cool palette I generated!"} url={'http://colors.com/generate/' + hexCode} className='m-1'>
+                    <FacebookShareButton title={"Check out this cool palette I generated!"} url={'http://localhost:3000/generate/' + hexCode} className='m-1'>
                       <FacebookIcon size={64} round={true}/>
                     </FacebookShareButton>
-                    <TumblrShareButton title={"Check out this cool palette I generated!"} url={'http://colors.com/generate/' + hexCode} className='m-1'>
+                    <TumblrShareButton title={"Check out this cool palette I generated!"} url={'http://localhost:3000/generate/' + hexCode} className='m-1'>
                       <TumblrIcon size={64} round={true}/>
                     </TumblrShareButton>
-                    <RedditShareButton title={"Check out this cool palette I generated!"} url={'http://colors.com/generate/' + hexCode} className='m-1'>
+                    <RedditShareButton title={"Check out this cool palette I generated!"} url={'http://localhost:3000/generate/' + hexCode} className='m-1'>
                       <RedditIcon size={64} round={true}/>
                     </RedditShareButton>
-                    <LinkedinShareButton title={"Check out this cool palette I generated!"} url={'http://colors.com/generate/' + hexCode} className='m-1'>
+                    <LinkedinShareButton title={"Check out this cool palette I generated!"} url={'http://localhost:3000/generate/' + hexCode} className='m-1'>
                       <LinkedinIcon size={64} round={true}/>
                     </LinkedinShareButton>
-                    <PinterestShareButton title={"Check out this cool palette I generated!"} url={'http://colors.com/generate/' + hexCode} className='m-1'>
+                    <PinterestShareButton title={"Check out this cool palette I generated!"} url={'http://localhost:3000/generate/' + hexCode} className='m-1'>
                       <PinterestIcon size={64} round={true}/>
                     </PinterestShareButton>
                   </div>

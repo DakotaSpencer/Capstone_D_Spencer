@@ -28,7 +28,7 @@ const ColorPage = (props) => {
           slides.item(n).style.visibility="visible"
         }
         const dataURL = canvas.toDataURL('image/png');
-        downloadjs(dataURL, 'download.png', 'image/png');
+        downloadjs(dataURL, `singleColor.png`, 'image/png');
     }, []);
 
     function capitalizeFirstLetter(string) {
