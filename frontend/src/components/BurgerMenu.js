@@ -20,11 +20,11 @@ const BurgerMenu = () => {
               </a>
           </li>
           <li>
-              <a className="menu-item" href="/generate">
-                <h3>
-                  Palette Generator
-                </h3>
-              </a>
+            <a className="menu-item" href="/generate">
+              <h3>
+                Palette Generator
+              </h3>
+            </a>
           </li>
         </ul>
       </Menu>

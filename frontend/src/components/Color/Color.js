@@ -65,7 +65,7 @@ const Color = ({color}) => {
                 <Dropdown.Toggle variant="light" id="dropdown-basic" title={blindnessMode} style={{fontSize:'20px'}}>
                   {capitalizeFirstLetter(blindnessMode)}
                 </Dropdown.Toggle>
-                <Dropdown.Menu id="dropdown-menu-align-right" title={blindnessMode}>
+                <Dropdown.Menu id="dropdown-menu-align-right" title={blindnessMode} style={{border: color.hex.value  + " 5px solid"}}>
                     <Dropdown.Item eventKey="no filter">No Filter</Dropdown.Item>
                     <Dropdown.Divider />
                     <div className='center'>Anomalous</div>
@@ -92,7 +92,7 @@ const Color = ({color}) => {
               <Dropdown.Toggle variant="light" id="dropdown-basic" title={blendingMode} style={{fontSize:'20px'}}>
                 {capitalizeFirstLetter(blendingMode)}
               </Dropdown.Toggle>
-              <Dropdown.Menu id="dropdown-menu-align-right" title={blendingMode}>
+              <Dropdown.Menu id="dropdown-menu-align-right" title={blendingMode} style={{border: color.hex.value  + " 5px solid"}}>
                   <Dropdown.Item eventKey="pass-through">Pass Through</Dropdown.Item>
                   <Dropdown.Item eventKey="normal">Normal</Dropdown.Item>
                   <Dropdown.Divider />
