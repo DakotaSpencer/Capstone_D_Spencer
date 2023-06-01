@@ -41,7 +41,7 @@ const Color = ({color}) => {
     //create array of empty objects
     //fill array with color that is locked.
     //replace specific color at index with color at same index in array
-    <div style={{backgroundColor:'#555'}}>
+    <div style={{backgroundColor:'#fff'}}>
       <div className='text-weight-thick flex-container' style={{backgroundColor : `${blindnessMode!=='no filter'? blinder[blindnessMode](color.hex.value):color.hex.value}`, height:455, color: `${color.contrast.value}`} }>
           <Link to={`/color/${color.hex.clean}`} className='color-link' style={{color: `${color.contrast.value}`}}>
             <h3 className='text-weight-thick p-2 m-2 flex-item'>{color.name.value}</h3>
@@ -119,8 +119,6 @@ const Color = ({color}) => {
           </Dropdown>
             
           </div>
-            
-          
       </div>
       <div style={{backgroundColor:'#323232'}}>
         <div style={{mixBlendMode:`${blendingMode}`}}>
