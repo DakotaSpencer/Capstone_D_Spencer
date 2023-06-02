@@ -160,9 +160,10 @@ const PaletteGenerator = () => {
       if (hexCode.toString().match(/([0-9a-fA-F]{3}){1,2}/)){
         const results = await axios.get(`https://www.thecolorapi.com/scheme?hex=${hexCode}&mode=${generationMode}&count=${colorCount}`)
         setColorData(results.data.colors)
-        if(results.data.colors[0].hex.clean === '000000' && results.data.colors[0].hex.clean === '000000'|| results.data.colors[0].hex.clean === 'FFFFFF'){
+        if(results.data.colors[0].hex.clean === '000000' || results.data.colors[0].hex.clean === 'FFFFFF'){
           navigate('/')
-        }else(
+        }
+        else(
           console.log(results.data)
         )
       }else{
@@ -173,11 +174,12 @@ const PaletteGenerator = () => {
 
     const addColor = () => {
       colorCount >= 8 ? setColorCount(8) : setColorCount(parseInt(colorCount) + 1)
-      
+      console.log(colorCount)
     }
 
     const removeColor = () => {
       colorCount <= 1 ? setColorCount(1) :  setColorCount(parseInt(colorCount) - 1)
+      console.log("New count: ", colorCount)
       //check if color is less than or equal to 1, or over 10, if not do nothing
     
     }
